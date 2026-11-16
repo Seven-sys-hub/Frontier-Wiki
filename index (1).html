@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Player wiki for Afterlife: The New Frontier, the Star Trek-inspired Minecraft space server.">
+<title>Frontier Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: encyclopedia shell — sticky search header, contents rail on the left, one article at a time with infoboxes on the right */
+:root{
+  --bg:#f7f8fa; --paper:#ffffff; --ink:#1b2230; --muted:#5b6577; --line:#d9dee7; --soft:#eef1f6;
+  --accent:#b8650f; --link:#1f5fae; --linkv:#5a3fa3; --code:#f1f3f7; --good:#2f7d4f; --warn:#a1560a; --bad:#b3261e;
+  --display:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f131a; --paper:#151a23; --ink:#e3e7ee; --muted:#9aa4b5; --line:#2a3240; --soft:#1c2230;
+  --accent:#e39a45; --link:#7fb0ef; --linkv:#b39ae8; --code:#1d2431; --good:#6fc394; --warn:#e8a25a; --bad:#f08b83; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f131a; --paper:#151a23; --ink:#e3e7ee; --muted:#9aa4b5; --line:#2a3240; --soft:#1c2230;
+  --accent:#e39a45; --link:#7fb0ef; --linkv:#b39ae8; --code:#1d2431; --good:#6fc394; --warn:#e8a25a; --bad:#f08b83; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.topin{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;color:var(--ink)}
+.brand b{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:.01em}
+.brand small{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.search{flex:1;min-width:220px;position:relative}
+.search input{width:100%;font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.results{position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--paper);border:1px solid var(--line);border-radius:6px;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:60vh;overflow:auto;z-index:6}
+.results a{display:block;padding:8px 12px;border-bottom:1px solid var(--line);color:var(--ink)}
+.results a:last-child{border-bottom:0}
+.results a:hover,.results a.sel{background:var(--soft);text-decoration:none}
+.results .rt{font-weight:600;color:var(--link)}
+.results .rs{font-size:13px;color:var(--muted);display:block}
+.results mark{background:color-mix(in srgb,var(--accent) 28%,transparent);color:inherit;border-radius:2px}
+.menubtn{display:none;font:inherit;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:7px 12px;cursor:pointer}
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
+nav.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px);align-self:start;max-height:calc(100vh - 90px);overflow:auto;font-size:14px;padding-right:4px}
+nav.side h4{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 4px;font-weight:600}
+nav.side h4:first-child{margin-top:0}
+nav.side a{display:block;padding:3px 8px;border-radius:4px;color:var(--ink)}
+nav.side a.on{background:var(--soft);color:var(--accent);font-weight:600}
+main{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:28px 32px 40px}
+article{display:none}
+article.on{display:block}
+article h1{font-family:var(--display);font-weight:600;font-size:32px;line-height:1.2;margin:0 0 4px;text-wrap:balance}
+.lede-from{color:var(--muted);font-size:13px;margin:0 0 18px;border-bottom:1px solid var(--line);padding-bottom:10px}
+article h2{font-family:var(--display);font-weight:600;font-size:23px;margin:28px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--line);text-wrap:balance}
+article h3{font-size:16px;font-weight:600;margin:20px 0 6px}
+article p,article li{max-width:72ch}
+article ul,article ol{padding-left:22px}
+article li{margin:3px 0}
+code,kbd{font-family:var(--mono);font-size:13px;background:var(--code);border:1px solid var(--line);border-radius:4px;padding:1px 5px;white-space:nowrap}
+.cmd{white-space:normal}
+.tw{overflow-x:auto;margin:12px 0;max-width:100%}
+table{border-collapse:collapse;font-size:14px;min-width:100%}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.infobox{float:right;width:290px;margin:0 0 16px 20px;border:1px solid var(--line);background:var(--soft);border-radius:6px;font-size:13.5px}
+.infobox .ih{font-family:var(--display);font-weight:600;font-size:17px;text-align:center;padding:8px 10px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--accent) 14%,var(--soft))}
+.infobox dl{margin:0;padding:6px 10px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.infobox dt{color:var(--muted);font-weight:500}
+.infobox dd{margin:0;font-variant-numeric:tabular-nums}
+.note{border-left:3px solid var(--accent);background:var(--soft);padding:10px 14px;border-radius:0 6px 6px 0;margin:14px 0;max-width:72ch}
+.note.warn{border-left-color:var(--bad)}
+.note b:first-child{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.portal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:16px 0}
+.portal a{display:block;border:1px solid var(--line);border-radius:6px;padding:12px 14px;color:var(--ink);background:var(--bg)}
+.portal a:hover{border-color:var(--accent);text-decoration:none}
+.portal a b{display:block;font-family:var(--display);font-size:17px;color:var(--link);margin-bottom:2px}
+.portal a span{font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:11.5px;padding:0 7px;border-radius:10px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.r-common{color:var(--muted)} .r-uncommon{color:var(--good)} .r-rare{color:var(--link)} .r-epic{color:var(--linkv)} .r-legendary{color:var(--accent)}
+.faq dt{font-weight:600;margin-top:14px}
+.faq dd{margin:4px 0 0 0;max-width:72ch}
+.seealso{margin-top:28px;font-size:14px;color:var(--muted)}
+.foot{color:var(--muted);font-size:12.5px;margin-top:36px;border-top:1px solid var(--line);padding-top:10px}
+@media (max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  nav.side{display:none;position:static;max-height:none;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px}
+  nav.side.open{display:block}
+  .menubtn{display:inline-block}
+  main{padding:20px 16px 30px}
+  .infobox{float:none;width:100%;margin:0 0 16px}
+  article h1{font-size:27px}
+}
+@media (prefers-reduced-motion:no-preference){.results a,nav.side a{transition:background .12s}}
+</style>
+</head>
+<body>
+
+
+<header class="top"><div class="topin">
+  <a class="brand" href="#main-page"><b>Frontier Wiki</b><small>Afterlife: The New Frontier</small></a>
+  <button class="menubtn" id="menubtn" type="button" aria-expanded="false" aria-controls="side">Contents</button>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the wiki (try “energy cells”, “relic”, “refit”)" autocomplete="off" aria-label="Search the wiki">
+    <div class="results" id="results" hidden></div>
+  </div>
+</div></header>
+
+<div class="shell">
+<nav class="side" id="side" aria-label="Contents">
+  <h4>Start here</h4>
+  <a href="#main-page">Main page</a>
+  <a href="#getting-started">Getting started</a>
+  <a href="#academy">Frontier Academy</a>
+  <a href="#orientation">Shipboard orientation</a>
+  <a href="#faq">Frequently asked questions</a>
+  <h4>The world</h4>
+  <a href="#sol">Sol and Frontier City</a>
+  <a href="#nexus">Nexus Station</a>
+  <a href="#planets">Planets</a>
+  <a href="#creatures">Creatures and bosses</a>
+  <a href="#alien-sites">Alien sites and lost cities</a>
+  <a href="#asteroids">Asteroid fields</a>
+  <h4>Ships</h4>
+  <a href="#ship">Your ship</a>
+  <a href="#hulls">Hull classes</a>
+  <a href="#crew">Crew and ranks</a>
+  <a href="#warp">Warp and navigation</a>
+  <a href="#storage">Ship storage</a>
+  <h4>Gear</h4>
+  <a href="#badge">Comm badge</a>
+  <a href="#tools">Tools and weapons</a>
+  <a href="#suits">Space suits and air</a>
+  <a href="#items">Items and rarity</a>
+  <a href="#disks">Research and data disks</a>
+  <h4>Crafting</h4>
+  <a href="#replicator">Replicator</a>
+  <a href="#matter">Matter values</a>
+  <a href="#energy-cells">Energy cells</a>
+  <h4>Work and money</h4>
+  <a href="#economy">Money and trading</a>
+  <a href="#contracts">Contracts</a>
+  <a href="#missions">Away missions</a>
+  <a href="#campaign">The Precursor Signal</a>
+  <h4>Homes</h4>
+  <a href="#starbases">Starbases and station plots</a>
+  <a href="#outposts">Outposts</a>
+  <h4>Conflict</h4>
+  <a href="#factions">Factions and alliances</a>
+  <a href="#outlands">The Outlands</a>
+  <a href="#pvp">PvP and bounties</a>
+  <h4>Reference</h4>
+  <a href="#commands">Player commands</a>
+</nav>
+
+<main id="main">
+
+<!-- ============================================================ MAIN PAGE -->
+<article id="main-page" data-title="Main page">
+  <h1>Welcome to the Frontier Wiki</h1>
+  <p class="lede-from">The player encyclopedia for <i>Afterlife: The New Frontier</i>, the Star Trek–inspired space server. Made by Seven.</p>
+  <p>On <b>Afterlife: The New Frontier</b> you start as a cadet at the Frontier Academy on Earth. After graduating you command a starship, warp across about 320 star systems and beam down to procedurally generated planets to mine, explore alien ruins, fight native creatures and take contracts. As your crew progresses you refit into bigger hulls, buy a starbase and eventually fight for the lawless Outlands.</p>
+  <p>Everything is server-side. Custom items, furniture and sounds come from the server's resource pack, which loads when you join. There are no crafting tables or furnaces. Everything is made in the <a href="#replicator">Replicator</a>.</p>
+  <div class="note"><b>New player?</b>Read <a href="#getting-started">Getting started</a>, then follow the glowing markers to the <a href="#academy">Academy</a>. In game, <code>/guide</code> gives you the Frontier Field Manual book.</div>
+  <h2>Browse</h2>
+  <div class="portal">
+    <a href="#getting-started"><b>Getting started</b><span>Your first hour, from the Arrival Port to your first ship.</span></a>
+    <a href="#hulls"><b>Hull classes</b><span>All 21 ships plus the Destiny, with prices, range and perks.</span></a>
+    <a href="#planets"><b>Planets</b><span>World classes, danger, air and gravity.</span></a>
+    <a href="#replicator"><b>Replicator</b><span>Matter, recycling, the Refinery and what you can make.</span></a>
+    <a href="#tools"><b>Tools and weapons</b><span>Phasers, the Mining Laser, Geo-Pick, Tricorder and more.</span></a>
+    <a href="#campaign"><b>The Precursor Signal</b><span>The six-chapter campaign that unlocks hull sizes.</span></a>
+    <a href="#contracts"><b>Contracts</b><span>The job board: eight contract types.</span></a>
+    <a href="#faq"><b>FAQ</b><span>Quick answers to the questions people ask most.</span></a>
+  </div>
+  <h2>The game loop</h2>
+  <ol>
+    <li><b>Train.</b> Graduate from the Academy and claim your free Wren Shuttle.</li>
+    <li><b>Earn.</b> Take <a href="#contracts">contracts</a> and <a href="#missions">away missions</a>, mine deposits and sell at the Nexus Station Exchange.</li>
+    <li><b>Grow.</b> Follow the <a href="#campaign">campaign</a> to unlock bigger hulls, then refit at the Nexus shipyard.</li>
+    <li><b>Settle.</b> Buy a <a href="#starbases">starbase</a> or a station plot, or set up an <a href="#outposts">outpost</a>.</li>
+    <li><b>Fight.</b> Pledge to an <a href="#factions">alliance</a> and take worlds in <a href="#outlands">the Outlands</a>.</li>
+  </ol>
+</article>
+
+<!-- ============================================================ GETTING STARTED -->
+<article id="getting-started" data-title="Getting started">
+  <h1>Getting started</h1>
+  <p class="lede-from">From Frontier Wiki · your first hour on the server</p>
+  <h2>1. Arrive at the Sol Arrival Port</h2>
+  <p>New players spawn at the <b>Arrival Port</b>, south of Frontier City on Earth (Sol). An arrow on your action bar points the way to the Academy. You'll get the <b>Frontier Field Manual</b>. If you lose it, type <code>/guide</code>.</p>
+  <h2>2. Ride the Warpline into the city</h2>
+  <p>The <b>Warpline</b> is a monorail between the Arrival Port, Frontier City, the three towns and the Wilds. Step onto a glowing lift pad to reach the platform, then pick your destination at the terminal. Every station has a light-blue beacon beam beside its lift pad, so you can always find your way back. See <a href="#sol">Sol and Frontier City</a>.</p>
+  <h2>3. Train at the Frontier Academy</h2>
+  <p>The Academy is in the center of Frontier City. Talk to the staff in order. There are nine training steps, and the action bar always shows the current one. You get a field kit, learn the tricorder and Replicator, fire at the phaser range, win a combat simulation and graduate. See <a href="#academy">Frontier Academy</a>.</p>
+  <h2>4. Claim your ship</h2>
+  <p>After graduating, run <code>/ship claim</code> on Earth to commission your free <b>Wren Shuttle</b>, then <code>/ship board</code> to beam aboard. Your first time aboard starts the <a href="#orientation">shipboard orientation</a>: recycle something into matter, replicate from matter, and make your first warp.</p>
+  <h2>5. Go to work</h2>
+  <ul>
+    <li>Open <code>/jobs</code> for contracts and <code>/missions</code> for away missions.</li>
+    <li>Warp to a nearby planet from the Helm, step into the transporter and beam down.</li>
+    <li>Mine <b>Warp Crystal</b> (amethyst) and <b>Hull Alloy</b> (raw iron block) deposits underground. Crystals fuel your warp drive and alloy pays for hull refits.</li>
+    <li>Sell cargo at the <b>Station Exchange</b> on <a href="#nexus">Nexus Station</a>.</li>
+  </ul>
+  <div class="note"><b>Starter kit</b>New captains get an O₂ Air Tank, 3 Energy Cells, 40 fuel and 25 credits. Graduation adds 250 credits and a full EVA Suit. Finishing orientation adds 150 credits and 6 Energy Cells.</div>
+  <div class="note warn"><b>Before you build</b>Planet worlds regenerate with a new seed every 72 hours. Anything you build on a planet is temporary. Build on your ship, a <a href="#starbases">starbase</a> or an <a href="#outposts">outpost</a>.</div>
+</article>
+
+<!-- ============================================================ ACADEMY -->
+<article id="academy" data-title="Frontier Academy">
+  <h1>Frontier Academy</h1>
+  <p class="lede-from">From Frontier Wiki · the training campus at the center of Frontier City</p>
+  <div class="infobox"><div class="ih">Frontier Academy</div><dl>
+    <dt>Location</dt><dd>Frontier City, Sol</dd>
+    <dt>Steps</dt><dd>9</dd>
+    <dt>Required</dt><dd>Yes, before claiming a ship or joining a crew</dd>
+    <dt>Reward</dt><dd>250 credits, EVA Suit, free Wren Shuttle</dd>
+  </dl></div>
+  <p>Every new player has to graduate from the Academy before they can claim a ship or join a crew. Players without a ship log in at the Academy. Follow the glowing marker to whichever staff member you need next. The action bar shows your step, for example <i>Academy 3/9</i>.</p>
+  <h2>Training steps</h2>
+  <div class="tw"><table>
+    <tr><th class="n">#</th><th>Step</th><th>Who</th><th>What to do</th></tr>
+    <tr><td class="n">1</td><td>Report</td><td>Commandant Reyes</td><td>Report to the Commandant in the Commissioning Office.</td></tr>
+    <tr><td class="n">2</td><td>Field kit</td><td>Quartermaster</td><td>Collect your kit. You choose a <b>Type-2 Phaser</b> or a <b>Plasma Sword</b>.</td></tr>
+    <tr><td class="n">3</td><td>Tricorder</td><td>Science</td><td>Right-click your tricorder to take a reading.</td></tr>
+    <tr><td class="n">4</td><td>Gather</td><td>Science</td><td>Gather 8 logs (any wood), 4 coal (charcoal or coal ore also count) and 4 raw iron (ingots or ore also count), then hand them in. You keep the items.</td></tr>
+    <tr><td class="n">5</td><td>Replicate</td><td>Science</td><td>Process your haul at a Replicator terminal. Use the Refinery for ore to ingots or logs to planks.</td></tr>
+    <tr><td class="n">6</td><td>Med Bay</td><td>Doctor</td><td>Talk to the Doctor for a check-up, or lie on any Med Bay bed.</td></tr>
+    <tr><td class="n">7</td><td>Phaser range</td><td>Tactical</td><td>Fire 10 shots at the range. Sword cadets get a loaner phaser.</td></tr>
+    <tr><td class="n">8</td><td>Combat sim</td><td>Tactical</td><td>Win a combat simulation. Use A/D to move, W/S for altitude and left-click to fire.</td></tr>
+    <tr><td class="n">9</td><td>Graduate</td><td>Commandant Reyes</td><td>Report back to graduate.</td></tr>
+  </table></div>
+  <h2>The field kit</h2>
+  <ul>
+    <li>Your weapon of choice (phaser or plasma sword)</li>
+    <li><b>Mining Laser</b>. It also works on Earth outside the Academy, so you can use it for the gather step.</li>
+    <li><b>Geo-Pick</b>, a pickaxe that needs no Energy Cells</li>
+    <li><b>Tricorder</b></li>
+    <li>12 <b>Nutrient Bars</b></li>
+  </ul>
+  <h2>Where to gather</h2>
+  <p>You can't dig inside Frontier City. Take the <b>Wilds Line</b> from the station on the south side of the city to the <b>Frontier Wilds</b> camp, out in open forest and hill country. Mine and log there, then ride back. Look for the green beacon over the camp.</p>
+  <div class="seealso">See also: <a href="#orientation">Shipboard orientation</a> · <a href="#sol">Sol and Frontier City</a></div>
+</article>
+
+<!-- ============================================================ ORIENTATION -->
+<article id="orientation" data-title="Shipboard orientation">
+  <h1>Shipboard orientation</h1>
+  <p class="lede-from">From Frontier Wiki · a new captain's first lessons aboard</p>
+  <p>The first time you board your own ship, the computer walks you through three lessons:</p>
+  <ol>
+    <li><b>Recycle.</b> Put an item into the Replicator's recycler to turn it into <b>matter</b>.</li>
+    <li><b>Replicate.</b> Make something from matter.</li>
+    <li><b>Warp.</b> Use the Helm to make your first jump.</li>
+  </ol>
+  <p>The reward is <b>150 credits and 6 Energy Cells</b>.</p>
+</article>
+
+<!-- ============================================================ SOL -->
+<article id="sol" data-title="Sol and Frontier City">
+  <h1>Sol and Frontier City</h1>
+  <p class="lede-from">From Frontier Wiki · Earth, the hub world</p>
+  <div class="infobox"><div class="ih">Sol (Earth)</div><dl>
+    <dt>Capital</dt><dd>Frontier City (~1,000 × 1,000)</dd>
+    <dt>Towns</dt><dd>Port Aurora (N), Meridian (E), Havenwood (W)</dd>
+    <dt>Arrival</dt><dd>Sol Arrival Port (S)</dd>
+    <dt>Transit</dt><dd>The Warpline</dd>
+    <dt>Mining</dt><dd>Frontier Wilds camp</dd>
+  </dl></div>
+  <p>Earth (Sol) is the hub. It's normal Earth terrain with flat city districts and highways built into it. The <b>Academy</b> is in the middle of <b>Frontier City</b>. Three towns lie about 2,000 blocks out: <b>Port Aurora</b> to the north, <b>Meridian</b> to the east and <b>Havenwood</b> to the west. The <b>Sol Arrival Port</b>, where new players arrive, is about 1,200 blocks south.</p>
+  <h2>The Warpline</h2>
+  <p>The Warpline is a monorail joining everything on Sol. It has the Arrival Port Line, Aurora Line, Meridian Line, Havenwood Line and Wilds Line.</p>
+  <ul>
+    <li>Step onto a <b>lift pad</b> to go up to the platform. Pads are marked with a glowing star, a light beam and a sign.</li>
+    <li>Every station has a <b>light-blue beacon</b> beside its lift pad.</li>
+    <li>Trains slow down in cities and run express on open track. You can't take fall or suffocation damage while riding.</li>
+    <li>Riders going straight through transfer between the Arrival Port Line and the Wilds Line automatically.</li>
+  </ul>
+  <h2>The Frontier Wilds</h2>
+  <p>A camp in open country, within about 1,600 blocks of the Arrival Port, for mining and logging before you have a ship. Digging isn't allowed in the cities. Take the Wilds Line from the station on the south side of Frontier City. The camp has a <b>green beacon</b> so you can find your way back to the station.</p>
+  <h2>On Earth</h2>
+  <ul>
+    <li><code>/ship claim</code> only works on Earth.</li>
+    <li>The <b>Quartermaster</b> (<code>/qm</code>) sells starter gear and only works on Earth.</li>
+    <li>A comm badge emergency recall (sneak and right-click) brings you back to Earth.</li>
+  </ul>
+</article>
+
+<!-- ============================================================ NEXUS -->
+<article id="nexus" data-title="Nexus Station">
+  <h1>Nexus Station</h1>
+  <p class="lede-from">From Frontier Wiki · the trade hub, shipyard and outpost office</p>
+  <p>Nexus Station is the space port. It's the system called <code>port</code> on the star map, and <code>/ship course port</code> takes you there. It has three decks: the Hangar deck, the Promenade and the Observation deck. Turbolifts connect them.</p>
+  <h2>Services</h2>
+  <ul>
+    <li><b>Station Exchange.</b> This is <i>the only place you can sell</i>. Right-click the exchange to open it.</li>
+    <li><b>Shipyard.</b> Hull refits happen here only, along with ship modules. A rotating hologram projector shows every hull class. Click the emitter pad to cycle through them.</li>
+    <li><b>Fuel depot.</b> 2 credits per fuel unit.</li>
+    <li><b>Outpost Office.</b> Buy Outpost Beacons, prefabs and furniture.</li>
+  </ul>
+  <h2>Ship modules</h2>
+  <p>Each module has three levels, paid in credits, Hull Alloy and Warp Crystals.</p>
+  <div class="tw"><table>
+    <tr><th>Module</th><th>Per level</th><th>Level I</th><th>Level II</th><th>Level III</th></tr>
+    <tr><td>Extended fuel tanks</td><td>+25% fuel capacity</td><td>150 cr, 15 alloy</td><td>400 cr, 40 alloy, 10 crystals</td><td>900 cr, 90 alloy, 25 crystals</td></tr>
+    <tr><td>Warp field extender</td><td>+3 warp range</td><td>250 cr, 25 alloy, 10 crystals</td><td>600 cr, 60 alloy, 25 crystals</td><td>1,400 cr, 140 alloy, 60 crystals</td></tr>
+    <tr><td>Warp coil tuning</td><td>+15% warp speed</td><td>200 cr, 20 alloy, 15 crystals</td><td>500 cr, 50 alloy, 35 crystals</td><td>1,100 cr, 110 alloy, 80 crystals</td></tr>
+    <tr><td>Replicator optimizer</td><td>+15% replicator efficiency</td><td>120 cr, 10 alloy</td><td>300 cr, 30 alloy</td><td>700 cr, 70 alloy</td></tr>
+  </table></div>
+</article>
+
+<!-- ============================================================ PLANETS -->
+<article id="planets" data-title="Planets">
+  <h1>Planets</h1>
+  <p class="lede-from">From Frontier Wiki · the worlds you beam down to</p>
+  <div class="infobox"><div class="ih">Planet facts</div><dl>
+    <dt>Systems</dt><dd>~320 in 24+ sectors</dd>
+    <dt>World size</dt><dd>2,000 × 2,000 blocks</dd>
+    <dt>Danger</dt><dd>0 (haven) to 5</dd>
+    <dt>Reset</dt><dd>Every 72 hours</dd>
+    <dt>PvP</dt><dd>Danger 5 and the Outlands</dd>
+  </dl></div>
+  <p>Every system on the star map is a planet with its own world. Worlds only load when someone beams down. Each one is 2,000 × 2,000 blocks with a horizon that drops away into space at the edge. You beam down to a random spot within 700 blocks of the center, at least 120 blocks from other crews' landing sites.</p>
+  <div class="note warn"><b>Planets reset</b>Planet worlds regenerate with a new seed every 72 hours. Don't keep anything on a planet.</div>
+  <h2>Danger</h2>
+  <p>Each planet has a danger rating from 0 to 5, shown as stars. Higher danger means tougher creatures, raiders, bosses and loot, and contracts that pay more.</p>
+  <ul>
+    <li><b>Danger 0, havens:</b> about two per sector. No hostile mobs, no raiders, always breathable.</li>
+    <li><b>Danger 2+:</b> hostile mobs get buffs, and elite creatures appear.</li>
+    <li><b>Danger 3+:</b> roaming class bosses.</li>
+    <li><b>Danger 5:</b> PvP is on.</li>
+  </ul>
+  <h2>Planet classes</h2>
+  <div class="tw"><table>
+    <tr><th>Class</th><th>Look</th><th>Air</th><th class="n">Gravity</th><th>Lost city?</th></tr>
+    <tr><td>Verdant world</td><td>Cherry groves, meadows, swamps</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Overgrowth world</td><td>Jungle, bamboo, mangroves</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Glass-dune world</td><td>Desert, badlands</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Frost world</td><td>Snow, ice spikes, frozen peaks</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Spore world</td><td>Mushroom fields, dark forest</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Mars-type world</td><td>Red badlands</td><td><b>O₂ needed</b></td><td class="n">0.45</td><td>No</td></tr>
+    <tr><td>Canyon world</td><td>Eroded badlands</td><td>Breathable</td><td class="n">0.7</td><td>Yes</td></tr>
+    <tr><td>Moon-type world</td><td>Grey craters</td><td><b>O₂ needed</b></td><td class="n">0.25</td><td>Yes</td></tr>
+    <tr><td>Shadow world</td><td>Soul sand valleys</td><td><b>O₂ needed</b></td><td class="n">0.85</td><td>Yes</td></tr>
+    <tr><td>Crystal world</td><td>Crystal plateaus</td><td>Breathable</td><td class="n">0.55</td><td>Yes</td></tr>
+    <tr><td>Toxic world</td><td>Poison swamps</td><td><b>O₂ needed</b></td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Ash world</td><td>Basalt deltas</td><td><b>O₂ needed</b></td><td class="n">0.8</td><td>Yes</td></tr>
+    <tr><td>Glacial world</td><td>Snow plains, frozen peaks</td><td>Breathable</td><td class="n">1.0</td><td>Yes</td></tr>
+    <tr><td>Ocean world</td><td>Warm seas</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+    <tr><td>Dune world</td><td>Desert</td><td>Breathable</td><td class="n">1.0</td><td>No</td></tr>
+  </table></div>
+  <p>Lower gravity means higher jumps, slower falls and softer landings. Every custom planet also gets its own variation on its class: flatter, rougher, more craters and so on. Danger-0 worlds are always breathable whatever their class.</p>
+  <h2>What's on a planet</h2>
+  <ul>
+    <li><b>Deposits</b> underground: amethyst blocks give <b>Warp Crystals</b> and raw iron blocks give <b>Hull Alloy</b>.</li>
+    <li><b>Ores</b> specific to each class, for example emerald and raw copper on verdant worlds.</li>
+    <li><b>Caves</b> and winding tunnels, some open to the surface.</li>
+    <li><b>Alien sites</b>, about 50 per world, and on some classes a <b>lost city</b>. See <a href="#alien-sites">Alien sites</a>.</li>
+    <li><b>Structures</b>: wrecks, pods, relays, ruins, probes, monoliths and craters. Crashed ships hold <b>salvage nodes</b> you can break for parts.</li>
+    <li><b>Exotic samples</b>: surface, deep, life, special and tissue samples drop while you mine and fight on that world. They sell at the Exchange and some contracts ask for them.</li>
+  </ul>
+</article>
+
+<!-- ============================================================ CREATURES -->
+<article id="creatures" data-title="Creatures and bosses">
+  <h1>Creatures and bosses</h1>
+  <p class="lede-from">From Frontier Wiki · native wildlife</p>
+  <p>Frontier's own creatures replace vanilla hostile mobs on planets. Sol and other non-planet worlds keep vanilla mobs. Each planet class has its own creatures. Some burrow, cloak or spit acid.</p>
+  <h2>Variants</h2>
+  <ul>
+    <li><b>Elites</b> have gold names: Armored, Swift, Volatile, Regenerating, Shielded or Venomous. They appear on danger 2+ worlds.</li>
+    <li><b>Alphas</b> are bigger, named pack leaders, one per world at a time. Killing one pays 400 credits.</li>
+    <li><b>Bosses</b>: each class has a boss that can roam near players on danger 3+ worlds and carries a bounty.</li>
+    <li><b>Reaver raiders</b> visit dangerous worlds and guard alien sites. On danger 3+ a Reaver Warlord can show up.</li>
+    <li><b>Lost-city guardians</b>: precursor constructs roam lost cities, and their boss is <b>The Last Overseer</b>.</li>
+  </ul>
+  <p>Creatures get tougher with danger: +22% health and +12% damage per danger level. All monsters, vanilla ones included, deal 80% of their normal damage and notice you from 80% of their normal range.</p>
+  <h2>Some of the creatures</h2>
+  <p>Thornback Boar, Razorwing, Bramble Lurker, Canopy Leaper, Vine Strangler, Sand Burrower, Glass Scorpion, Dune Skimmer, Dust Devil, Cliff Raptor, Rock Crusher, Frost Stalker, Shardback Crab, Snow Wisp, Glacier Tusker, Ice Shard, Spore Crawler, Fungal Shambler, Puffcap Bomber, Acid Slug, Bloat Toad, Ash Hound, Dust Strider, Rust Mite, Cinder Golem, Ember Bat, Gloom Wraith, Crater Crab, Void Leech and Shade Stalker.</p>
+  <p>Phasers hit every mob, including the custom creature models.</p>
+</article>
+
+<!-- ============================================================ ALIEN SITES -->
+<article id="alien-sites" data-title="Alien sites and lost cities">
+  <h1>Alien sites and lost cities</h1>
+  <p class="lede-from">From Frontier Wiki · where artifacts and relics come from</p>
+  <h2>Alien sites</h2>
+  <p>Alien sites are large points of interest: <b>temples, stone circles, spires, crashed saucers, buried vaults, ruins and resonators</b>. A typical planet has about 50, spread out every few hundred blocks. Earth, the space station and Nether-type worlds don't have them.</p>
+  <ul>
+    <li><b>Finding them:</b> the Survey Scanner (tricorder) reports the nearest site within 400 blocks. If you have an away mission or contract that needs a site, a compass on your action bar points to the nearest one within 900 blocks.</li>
+    <li><b>Discovery:</b> the first time you walk into a site you get a title card and a bonus of 25 credits × (danger + 1).</li>
+    <li><b>Guardians:</b> the first discovery of a site, by anyone, spawns its guardians.</li>
+    <li><b>Any site counts.</b> Missions and contracts that say “find an alien site” accept any site on that planet, including ones you've already visited.</li>
+  </ul>
+  <h3>Site loot</h3>
+  <p>Site crates always hold at least one <b>Alien Artifact</b>. They can also hold credits, Warp Crystals, Hull Alloy, Energy Cells, ender pearls, a data disk (about 18%) and occasionally a tool. They have a chance of a <b>Precursor Relic</b>: at least 8% per cache, or 2% × danger on dangerous worlds.</p>
+  <h2>Lost cities</h2>
+  <p>About half of shadow, ash, lunar, crystal, glacial and canyon worlds have an ancient <b>lost city</b>, 250 to 700 blocks from the planet's center. It's sunk into the ground and surrounded by bones and webs. Precursor constructs roam it, and its guardian boss is <b>The Last Overseer</b>. Defeating a lost-city guardian is a Chapter 5 campaign objective.</p>
+  <h2>Where relics come from</h2>
+  <div class="tw"><table>
+    <tr><th>Source</th><th>Relic chance</th></tr>
+    <tr><td>“The &lt;planet&gt; Relic” away missions</td><td>Guaranteed on completion</td></tr>
+    <tr><td>“Ruins of &lt;planet&gt;” away missions</td><td>35%</td></tr>
+    <tr><td>Other away missions, danger 4+</td><td>6% × danger</td></tr>
+    <tr><td>Alien-site crates</td><td>At least 8%, more on dangerous worlds</td></tr>
+    <tr><td>Campaign Chapter 6 reward</td><td>2 relics</td></tr>
+  </table></div>
+  <p>Relics sell for 1,800 credits at the Exchange. You need them for Precursor armor, the Ricochet Matrix disk and several campaign quests. Analyzing one at a Research Bench gives 150 research data.</p>
+</article>
+
+<!-- ============================================================ ASTEROIDS -->
+<article id="asteroids" data-title="Asteroid fields">
+  <h1>Asteroid fields</h1>
+  <p class="lede-from">From Frontier Wiki · mining in vacuum</p>
+  <p>Every system has an asteroid field. Click <b>Asteroid Field</b> at the Helm, or run <code>/ship asteroids</code>. Fields are vacuum with 20% gravity and rich ore, so bring an O₂ tank and a Mining Laser. Your comm badge beams you back. The Chapter 3 quest “Rock Hoppers” asks for 20 alloy mined in asteroid fields.</p>
+</article>
+
+<!-- ============================================================ SHIP -->
+<article id="ship" data-title="Your ship">
+  <h1>Your ship</h1>
+  <p class="lede-from">From Frontier Wiki · living aboard</p>
+  <p>Your ship is your home, your workshop and your faction. Claim your first one with <code>/ship claim</code> on Earth after graduating, then beam up with <code>/ship board</code> or right-click your comm badge.</p>
+  <h2>Aboard</h2>
+  <ul>
+    <li><b>Helm:</b> the star map. Click a system to warp. It also has Navigation, Asteroid Field and the free warp home (the corner star).</li>
+    <li><b>Ops:</b> ship systems and contracts.</li>
+    <li><b>Transporter:</b> step into the booth. After a 3-second countdown everyone on the pads beams down. Step off to cancel.</li>
+    <li><b>Turbolift pad:</b> step on it to choose a deck.</li>
+    <li><b>Replicator:</b> makes almost everything. See <a href="#replicator">Replicator</a>.</li>
+    <li><b>Cargo bay:</b> ship storage. See <a href="#storage">Ship storage</a>.</li>
+  </ul>
+  <h2>Departments</h2>
+  <p>Size 3 and bigger hulls have every department: Bridge, Engineering (the Replicator), Science and Research (Research and Mod Benches), Med Bay and Quarters. Smaller ships fit what they can. Signs at each door name the room. The built-in stations open when you right-click them.</p>
+  <h2>Protection</h2>
+  <ul>
+    <li>Only crew can build or use things aboard. Guests can look but not touch.</li>
+    <li>The original hull blocks and the outer hull can't be broken. Crew with the <i>build</i> right can add their own blocks inside.</li>
+    <li>Explosions, fire, mob griefing and liquids never touch a hull, and ships never expire.</li>
+    <li>Ender pearls and chorus fruit don't work aboard ships.</li>
+    <li>Players can't hurt each other aboard.</li>
+    <li>If you die, you respawn on your ship.</li>
+  </ul>
+  <h2>Shipboard crew</h2>
+  <p>Bigger hulls come with NPC crew in Frontier uniforms. They only appear while someone is aboard, can't be hurt and never stand on a console.</p>
+  <ul>
+    <li><b>Officers at their posts:</b> size 3+ hulls get a helm officer, operations officer and engineer. Size 4 adds tactical and a doctor in the Med Bay, size 5 a science officer, and size 6 a transporter chief.</li>
+    <li><b>Crew on the decks:</b> 1 on size 2, 2 on size 3, 3 on size 4, 5 on size 5, 8 on size 6 and 10 on the Destiny.</li>
+    <li><b>Traders:</b> some of the crew (gold names) run a small shop. Right-click them. Their stock follows your hull's specialty: a mining barge's Mining Foreman sells lasers and buys raw ore, a medical cruiser's medic sells med supplies, and so on.</li>
+    <li>Right-click any crew member to talk. The captain or first officer can stand them down with <code>/ship npcs off</code> (and <code>/ship npcs on</code> to bring them back).</li>
+  </ul>
+  <h2>Renaming</h2>
+  <p><code>/ship name &lt;name&gt;</code>. Your ship's name is also your <a href="#factions">faction's</a> name.</p>
+  <h2>Cargo pod</h2>
+  <p>Hauler hulls (Mule, Pelican, Crane, Titan) can beam a crew-only <b>field cargo pod</b> down beside the away team with <code>/ship pod</code>. It holds 27 slots on size 1–2 hulls, 36 on size 3–4 and 54 on size 5–6. It beams back up when the last crew member leaves the planet.</p>
+</article>
+
+<!-- ============================================================ HULLS -->
+<article id="hulls" data-title="Hull classes">
+  <h1>Hull classes</h1>
+  <p class="lede-from">From Frontier Wiki · every ship you can command</p>
+  <p>There are six hull sizes. You start in size 1 and unlock each bigger size by finishing a chapter of <a href="#campaign">the Precursor Signal</a>. Refits are done at the <a href="#nexus">Nexus shipyard</a>. They're paid from the <b>ship fund</b> in credits plus the captain's <b>Hull Alloy</b>.</p>
+  <ul>
+    <li>A refit can go up to <b>one size bigger</b> than your current hull. You can also move sideways or down, but going down costs 30%.</li>
+    <li>Warp time per jump grows with size, from 8–30 seconds at size 1 to 60–120 seconds at size 6.</li>
+    <li>When you change tier, your ship's default name updates and your interior storage moves into the new hull.</li>
+  </ul>
+  <h2>All hulls</h2>
+  <div class="tw"><table>
+    <tr><th>Ship</th><th class="n">Size</th><th>Perks</th><th class="n">Fuel</th><th class="n">Range</th><th class="n">Crew</th><th class="n">Credits</th><th class="n">Alloy</th></tr>
+    <tr><td>Wren Shuttle</td><td class="n">1</td><td>Courier</td><td class="n">60</td><td class="n">6</td><td class="n">2</td><td class="n">Free</td><td class="n">0</td></tr>
+    <tr><td>Kestrel Runabout</td><td class="n">1</td><td>Science</td><td class="n">70</td><td class="n">7</td><td class="n">3</td><td class="n">1,200</td><td class="n">15</td></tr>
+    <tr><td>Gnat Interceptor</td><td class="n">1</td><td>Combat</td><td class="n">55</td><td class="n">6</td><td class="n">2</td><td class="n">1,500</td><td class="n">18</td></tr>
+    <tr><td>Falcon Scout</td><td class="n">2</td><td>Explorer</td><td class="n">150</td><td class="n">12</td><td class="n">4</td><td class="n">5,000</td><td class="n">30</td></tr>
+    <tr><td>Lark Survey Ship</td><td class="n">2</td><td>Science</td><td class="n">140</td><td class="n">11</td><td class="n">4</td><td class="n">6,000</td><td class="n">35</td></tr>
+    <tr><td>Mule Cargo Tug</td><td class="n">2</td><td>Hauler, Mining</td><td class="n">160</td><td class="n">10</td><td class="n">3</td><td class="n">5,500</td><td class="n">40</td></tr>
+    <tr><td>Heron Frigate</td><td class="n">3</td><td>Combat</td><td class="n">260</td><td class="n">16</td><td class="n">6</td><td class="n">14,000</td><td class="n">70</td></tr>
+    <tr><td>Osprey Escort</td><td class="n">3</td><td>Stealth, Combat</td><td class="n">220</td><td class="n">15</td><td class="n">5</td><td class="n">15,000</td><td class="n">75</td></tr>
+    <tr><td>Pelican Freighter</td><td class="n">3</td><td>Trader, Hauler</td><td class="n">300</td><td class="n">14</td><td class="n">6</td><td class="n">13,000</td><td class="n">80</td></tr>
+    <tr><td>Ibis Science Vessel</td><td class="n">3</td><td>Science, Explorer</td><td class="n">250</td><td class="n">16</td><td class="n">6</td><td class="n">14,500</td><td class="n">70</td></tr>
+    <tr><td>Condor Cruiser</td><td class="n">4</td><td>Explorer, Trader</td><td class="n">400</td><td class="n">22</td><td class="n">8</td><td class="n">30,000</td><td class="n">120</td></tr>
+    <tr><td>Albatross Explorer</td><td class="n">4</td><td>Explorer, Courier</td><td class="n">480</td><td class="n">27</td><td class="n">8</td><td class="n">36,000</td><td class="n">130</td></tr>
+    <tr><td>Raven Heavy Escort</td><td class="n">4</td><td>Combat, Stealth</td><td class="n">380</td><td class="n">20</td><td class="n">9</td><td class="n">35,000</td><td class="n">150</td></tr>
+    <tr><td>Stork Medical Cruiser</td><td class="n">4</td><td>Medical, Diplomat</td><td class="n">400</td><td class="n">21</td><td class="n">10</td><td class="n">33,000</td><td class="n">140</td></tr>
+    <tr><td>Eagle Heavy Cruiser</td><td class="n">5</td><td>Explorer, Trader</td><td class="n">700</td><td class="n">32</td><td class="n">12</td><td class="n">60,000</td><td class="n">260</td></tr>
+    <tr><td>Harrier Battlecruiser</td><td class="n">5</td><td>Combat, Courier</td><td class="n">620</td><td class="n">30</td><td class="n">12</td><td class="n">68,000</td><td class="n">300</td></tr>
+    <tr><td>Swan Diplomatic Cruiser</td><td class="n">5</td><td>Diplomat, Medical</td><td class="n">680</td><td class="n">30</td><td class="n">14</td><td class="n">64,000</td><td class="n">270</td></tr>
+    <tr><td>Crane Mining Barge</td><td class="n">5</td><td>Mining, Hauler</td><td class="n">750</td><td class="n">26</td><td class="n">12</td><td class="n">58,000</td><td class="n">320</td></tr>
+    <tr><td>Phoenix Flagship</td><td class="n">6</td><td>Explorer, Diplomat</td><td class="n">1,000</td><td class="n">40</td><td class="n">16</td><td class="n">110,000</td><td class="n">400</td></tr>
+    <tr><td>Titan Carrier</td><td class="n">6</td><td>Carrier, Hauler</td><td class="n">1,100</td><td class="n">38</td><td class="n">24</td><td class="n">125,000</td><td class="n">480</td></tr>
+    <tr><td>Leviathan Dreadnought</td><td class="n">6</td><td>Combat, Stealth</td><td class="n">950</td><td class="n">38</td><td class="n">18</td><td class="n">140,000</td><td class="n">520</td></tr>
+    <tr><td><b>Destiny</b></td><td class="n">6</td><td>Explorer, Diplomat, Combat</td><td class="n">1,400</td><td class="n">46</td><td class="n">30</td><td class="n">250,000</td><td class="n">750</td></tr>
+  </table></div>
+  <p>The <b>Destiny</b> is the one-of-a-kind capital ship. It has three nacelles, a command tier and a shuttle bay, and only crews who have finished the campaign can commission it.</p>
+  <h2>Perks</h2>
+  <div class="tw"><table>
+    <tr><th>Perk</th><th>Effect</th></tr>
+    <tr><td>Courier</td><td>25% faster warp, +40% pay on delivery contracts</td></tr>
+    <tr><td>Explorer</td><td>25% less fuel, +25% warp range</td></tr>
+    <tr><td>Science</td><td>+50% exotic samples, +20% pay on specimen and survey contracts</td></tr>
+    <tr><td>Combat</td><td>Raiders act one danger level lower, +50% salvage</td></tr>
+    <tr><td>Stealth</td><td>Half as many raider ambushes</td></tr>
+    <tr><td>Hauler</td><td>Double matter storage, +15% recycling</td></tr>
+    <tr><td>Trader</td><td>+15% Exchange sales, +15% haul and bounty pay</td></tr>
+    <tr><td>Mining</td><td>+1 per deposit, +30% mining pay</td></tr>
+    <tr><td>Medical</td><td>Crew regenerate aboard, O₂ lasts 25% longer</td></tr>
+    <tr><td>Diplomat</td><td>+2 contract offers, +1 active contract, +20% pay</td></tr>
+    <tr><td>Carrier</td><td>Big crews, Outpost Beacons at half price</td></tr>
+  </table></div>
+</article>
+
+<!-- ============================================================ CREW -->
+<article id="crew" data-title="Crew and ranks">
+  <h1>Crew and ranks</h1>
+  <p class="lede-from">From Frontier Wiki · running a ship together</p>
+  <p>The captain adds crew with <code>/ship crew add &lt;name&gt;</code> and manages ranks with <code>/ship crew menu</code>. Each hull has a crew limit (see <a href="#hulls">Hull classes</a>). To leave a crew, use <code>/ship leave &lt;captain&gt;</code>. Rank titles appear above heads and in the tab list.</p>
+  <div class="tw"><table>
+    <tr><th>Rank</th><th>Tag</th><th class="n">Max</th><th>Rights</th></tr>
+    <tr><td>Captain</td><td>CAPT</td><td class="n">1</td><td>Manage crew, helm, cargo, spend, build</td></tr>
+    <tr><td>First Officer</td><td>1O</td><td class="n">1</td><td>Manage crew, helm, cargo, spend, build</td></tr>
+    <tr><td>Second Officer</td><td>2O</td><td class="n">1</td><td>Helm, cargo, build</td></tr>
+    <tr><td>Chief Engineer</td><td>ENG</td><td class="n">1</td><td>Helm, cargo, build</td></tr>
+    <tr><td>Chief Medical Officer</td><td>CMO</td><td class="n">1</td><td>Helm, cargo</td></tr>
+    <tr><td>Science Officer</td><td>SCI</td><td class="n">1</td><td>Helm, cargo</td></tr>
+    <tr><td>Chief of Security</td><td>SEC</td><td class="n">1</td><td>Helm, cargo</td></tr>
+    <tr><td>Helm Officer</td><td>HLM</td><td class="n">2</td><td>Helm, cargo</td></tr>
+    <tr><td>Ensign</td><td>ENS</td><td class="n">Any</td><td>Helm, cargo</td></tr>
+    <tr><td>Crewman</td><td>CRW</td><td class="n">Any</td><td>Cargo</td></tr>
+  </table></div>
+  <p><b>Spend</b> lets that rank use the ship fund for refits, modules, fuel and Outpost Beacons. <b>Build</b> lets them place and break their own blocks aboard.</p>
+  <h2>Guests</h2>
+  <p><code>/ship invite &lt;name&gt;</code> lets someone visit your ship and starbase, and <code>/ship uninvite</code> removes them. <code>/ship guests</code> lists your guests, and <code>/ship visit &lt;name&gt;</code> takes you to a ship you're invited to. Guests can look but not touch.</p>
+</article>
+
+<!-- ============================================================ WARP -->
+<article id="warp" data-title="Warp and navigation">
+  <h1>Warp and navigation</h1>
+  <p class="lede-from">From Frontier Wiki · getting around the galaxy</p>
+  <h2>Warping</h2>
+  <p>At the Helm, click a system within your warp range. Warping burns fuel: 2 plus 1.5 per unit of distance. One <b>Warp Crystal</b> is worth 10 fuel. You can also buy fuel at Nexus Station for 2 credits per unit. The corner star on the Helm warps you home for free.</p>
+  <h2>Long trips</h2>
+  <p>Use <b>Navigation</b> at the Helm, or <code>/ship course &lt;earth|port|outlaw|system&gt;</code>. It plots a multi-jump course within your range. Shift-click Navigation to make each next jump. <code>/ship course clear</code> cancels it, and <code>/ship map</code> gives you a Galaxy Map to hold.</p>
+  <h2>Raider encounters</h2>
+  <p>Raiders can intercept you at warp. The chance is 25% per jump plus 8% per danger level of the route, up to 75%. When it happens the red alert sounds and everyone aboard plays the defense minigame: A/D to move, W/S for altitude, left-click to fire. Winning pays credits. If every defender is beaten, you lose 20% of your fuel. Stealth hulls are ambushed half as often.</p>
+  <h2>Docking</h2>
+  <p>Warp home and your ship docks at your starbase, station plot or outpost. Walk through the airlock to go aboard the base. The airlock locks again as soon as someone sets a new course.</p>
+</article>
+
+<!-- ============================================================ STORAGE -->
+<article id="storage" data-title="Ship storage">
+  <h1>Ship storage</h1>
+  <p class="lede-from">From Frontier Wiki · keeping your stuff</p>
+  <ul>
+    <li><b>Storage Controller:</b> place one aboard for searchable storage shared by the whole crew. Right-click it to open. The title shows “Ship Storage” with used and total space.</li>
+    <li><b>Storage Modules</b> add more space.</li>
+    <li>The <b>Wireless Tablet</b> opens your storage from anywhere on the ship.</li>
+    <li><b>Storage Crates</b> (shulker boxes) keep their contents when broken. Chests and barrels also pack into a crate item when broken.</li>
+    <li><b>Antimatter Crates and Vaults</b> are decorative storage furniture.</li>
+  </ul>
+  <p>All of these are made at the <a href="#replicator">Replicator</a>. Crates you pick up on a planet and place on your ship stay yours and open normally.</p>
+  <h2>Suit storage</h2>
+  <p>Your space suit has pouches: open them with <code>/suit</code> or sneak + swap hands (F). The EVA suit has 9 slots, Pathfinder 18, Assault 27, Vanguard 36 and Precursor 54.</p>
+</article>
+
+<!-- ============================================================ BADGE -->
+<article id="badge" data-title="Comm badge">
+  <h1>Comm badge</h1>
+  <p class="lede-from">From Frontier Wiki · your lifeline</p>
+  <p>The Comm Badge never leaves you. It's locked to your hotbar and can't be put into containers.</p>
+  <ul>
+    <li><b>Right-click:</b> beam up to your ship when it's in orbit.</li>
+    <li><b>Sneak + right-click:</b> emergency recall to Earth. Stand still for 10 seconds. It has a 5-minute cooldown.</li>
+    <li>It doesn't work while your ship is at warp, or while you're in PvP combat.</li>
+  </ul>
+  <p>If you lose it, the Replicator makes a new one for 40 matter, or the Quartermaster sells one for 60 credits.</p>
+</article>
+
+<!-- ============================================================ TOOLS -->
+<article id="tools" data-title="Tools and weapons">
+  <h1>Tools and weapons</h1>
+  <p class="lede-from">From Frontier Wiki · field equipment</p>
+  <p>Most Frontier tools run on <a href="#energy-cells">Energy Cells</a> from your inventory. One cell holds 100 charge.</p>
+  <h2>Type-2 Phaser</h2>
+  <p>Left- or right-click fires a beam: orange in kill mode, blue in stun mode. Sneak + right-click switches mode. Each shot uses 4 charge (3 when stunning) and deals 7 damage out to 40 blocks. Every shot wears the emitter by one condition point, out of 250. At 0 it won't fire until you repair it at the Replicator Workshop.</p>
+  <h2>Type-3 Phaser Rifle</h2>
+  <p>Does 12 damage out to 64 blocks for 7 charge per shot, with 400 condition.</p>
+  <h3>Phaser upgrades</h3>
+  <p>At the Replicator Workshop, holding the phaser, you can upgrade it up to level 5 on three tracks. The <b>Emitter</b> adds 15% damage per level, the <b>Focus</b> adds 6 blocks of range per level, and the <b>Cells</b> track cuts charge per shot by 10% per level. Levels 4 and up also need Alien Artifacts.</p>
+  <h2>Plasma Sword</h2>
+  <p>A melee weapon that does 9 damage and sets targets on fire, using 2 charge per hit. With no charge it only does 2 damage.</p>
+  <h2>Mining Laser</h2>
+  <p>Right-click ore at up to 20 blocks away. It uses 3 charge per block. Sneak to switch between a focused beam and a 3×3 beam. It works on planets, in asteroid fields and on Earth outside the cities. Mining data disks fit on it, and with Excavation Field the wide beam becomes 5×5.</p>
+  <h2>Geo-Pick</h2>
+  <p>An unbreakable pickaxe that needs no Energy Cells. It's slower than the laser but free to run. It's in the Academy kit, and the Replicator makes one for 30 matter.</p>
+  <h2>Tricorder</h2>
+  <ul>
+    <li><b>Right-click:</b> mineral scan. Ores within 20 blocks glow in their own colors, with an arrow to the nearest. It uses 8 charge. Ore names match the resource pack, so Cuperite shows as Cuperite.</li>
+    <li><b>Sneak + right-click near creatures:</b> a life-sign scan, for 12 charge. Away missions use it.</li>
+    <li>It also reports the nearest alien site within 400 blocks.</li>
+    <li>Scans don't find ore inside the cities.</li>
+  </ul>
+  <h3>Tricorder upgrades</h3>
+  <p>At the Replicator Workshop, holding the tricorder, there are three levels on each track. The <b>Sensor array</b> adds 8 blocks of radius per level, up to a maximum of 48. The <b>Marker buffer</b> adds 4 more marked finds per level, and they glow 15 seconds longer. <b>Power cells</b> cut charge per scan by 20% per level. The <b>Spectral filter</b> is a one-time fitting: once fitted, press swap-hands (F) to cycle which ore you scan for. Mk 2 costs 200 credits, 3 alloy and 1 crystal, and each level after costs more. The filter costs 600 credits, 6 alloy and 4 crystals.</p>
+  <h2>Med Injector</h2>
+  <p>Heals you for 25 charge, with a 10-second cooldown.</p>
+  <h2>Grav Thruster</h2>
+  <p>Launches you upward and forward for 12 charge.</p>
+  <h2>Where to get them</h2>
+  <div class="tw"><table>
+    <tr><th>Item</th><th class="n">Replicator (matter)</th><th class="n">Quartermaster (credits)</th></tr>
+    <tr><td>Comm Badge</td><td class="n">40</td><td class="n">60</td></tr>
+    <tr><td>Geo-Pick</td><td class="n">30</td><td class="n">–</td></tr>
+    <tr><td>Tricorder</td><td class="n">140</td><td class="n">150</td></tr>
+    <tr><td>Med Injector</td><td class="n">120</td><td class="n">100</td></tr>
+    <tr><td>Grav Thruster</td><td class="n">220</td><td class="n">200</td></tr>
+    <tr><td>Type-2 Phaser</td><td class="n">320</td><td class="n">280</td></tr>
+    <tr><td>Plasma Sword</td><td class="n">360</td><td class="n">320</td></tr>
+    <tr><td>Mining Laser</td><td class="n">380</td><td class="n">340</td></tr>
+  </table></div>
+  <p>The Phaser Rifle is made from materials: 10 alloy, 4 cells, 4 crystals, 2 diamonds and 450 credits.</p>
+</article>
+
+<!-- ============================================================ SUITS -->
+<article id="suits" data-title="Space suits and air">
+  <h1>Space suits and air</h1>
+  <p class="lede-from">From Frontier Wiki · staying alive out there</p>
+  <h2>Air</h2>
+  <p>Airless worlds (Mars-type, Moon-type, Shadow, Toxic and Ash) and asteroid fields need an <b>O₂ Air Tank</b> in your inventory. A full tank lasts 15 minutes without a suit. A warning shows when you have 60 seconds left. With no air you take damage every 2 seconds.</p>
+  <p>Tanks refill by themselves aboard ships, at Nexus Station, at outposts, at the Academy and inside your own station plot, where air is unlimited.</p>
+  <h2>Suit tiers</h2>
+  <p>A full suit makes your air last longer and gives set bonuses. Suits are made at the Replicator from materials.</p>
+  <div class="tw"><table>
+    <tr><th>Suit</th><th>Base</th><th>Air use</th><th>Set bonus</th><th class="n">Pouch</th><th>Notes</th></tr>
+    <tr><td>EVA Suit</td><td>Chainmail</td><td>60%</td><td>Night vision</td><td class="n">9</td><td>Given at graduation</td></tr>
+    <tr><td>Pathfinder Suit</td><td>Iron</td><td>50%</td><td>Night vision, speed</td><td class="n">18</td><td>Hazard immune</td></tr>
+    <tr><td>Assault Armor</td><td>Diamond</td><td>40%</td><td>Resistance, strength</td><td class="n">27</td><td>Needs artifacts</td></tr>
+    <tr><td>Vanguard Exosuit</td><td>Netherite</td><td>25%</td><td>Resistance, strength, night vision, speed</td><td class="n">36</td><td>Hazard immune</td></tr>
+    <tr><td>Precursor Exosuit</td><td>Netherite</td><td>None</td><td>Resistance II, regeneration, speed, night vision, strength</td><td class="n">54</td><td>Unbreakable, self-contained air, needs a relic per piece</td></tr>
+    <tr><td>Marauder Rig</td><td>Netherite</td><td>–</td><td>Strength II, speed II, resistance, night vision, fire resistance</td><td class="n">–</td><td>Outlaw-only, sold at the Outlaw Armory</td></tr>
+  </table></div>
+  <p>Each armor piece fits its own slot. Hazard-immune suits ignore hostile planet effects. Mod disks such as Life Support, Hazard Shielding, Thermal Regulator and Grav Stabilizers fit armor; see <a href="#disks">Data disks</a>.</p>
+</article>
+
+<!-- ============================================================ ITEMS -->
+<article id="items" data-title="Items and rarity">
+  <h1>Items and rarity</h1>
+  <p class="lede-from">From Frontier Wiki · Frontier's custom items</p>
+  <h2>Rarity</h2>
+  <p>Every Frontier item shows its rarity as the last line of its lore: <span class="r-common">◆ COMMON</span>, <span class="r-uncommon">◆ UNCOMMON</span>, <span class="r-rare">◆ RARE</span>, <span class="r-epic">◆ EPIC</span>, <span class="r-legendary">◆ LEGENDARY</span>. Data disks go by level: I is uncommon, II rare, III epic, and IV–V legendary. Alien Artifacts are rare and Precursor Relics are epic.</p>
+  <h2>Resources</h2>
+  <div class="tw"><table>
+    <tr><th>Item</th><th>What it's for</th><th>How to get it</th></tr>
+    <tr><td>Warp Crystal</td><td>Warp fuel (10 each), refits, recipes</td><td>Amethyst deposits on planets, loot, contracts</td></tr>
+    <tr><td>Hull Alloy</td><td>Refits, gear, armor</td><td>Raw iron block deposits, asteroid fields, the Replicator (140 matter, or 4 iron + 3 copper ingots + 1 crystal)</td></tr>
+    <tr><td>Energy Cell</td><td>Powers tools and weapons</td><td>See <a href="#energy-cells">Energy cells</a></td></tr>
+    <tr><td>Alien Artifact</td><td>Research data, armor, upgrades, bounties</td><td>Alien-site crates, away missions</td></tr>
+    <tr><td>Precursor Relic</td><td>Precursor armor, Ricochet disk, campaign</td><td>See <a href="#alien-sites">Alien sites</a></td></tr>
+    <tr><td>Exotic samples</td><td>Sell, contracts</td><td>Drop while working on a planet. They only drop on their own world.</td></tr>
+    <tr><td>Credit chips</td><td>Money</td><td>Loot. They're deposited into your wallet automatically.</td></tr>
+  </table></div>
+  <h2>Food</h2>
+  <p>Nutrient Bars, Ration Packs, Field Meals, Protein Cubes, Hydro-gel, Stim Rations and Med-pack Rations. All come from the Replicator. Nutrient Bars are 6 for 5 matter.</p>
+  <h2>Stacking</h2>
+  <p>Frontier items are cleaned up every 30 seconds and when you join, so old copies stack with new ones.</p>
+</article>
+
+<!-- ============================================================ DISKS -->
+<article id="disks" data-title="Research and data disks">
+  <h1>Research and data disks</h1>
+  <p class="lede-from">From Frontier Wiki · upgrading your gear</p>
+  <h2>Research Bench</h2>
+  <ul>
+    <li><b>Analyze</b> Alien Artifacts (10 data each) and Precursor Relics (150 data each) into research data.</li>
+    <li><b>Research</b> the exact disk you want for research data plus materials.</li>
+    <li><b>Synthesize</b> a random disk for 200 data.</li>
+    <li><b>Combine</b> two identical disks into the next level.</li>
+    <li><b>Augment</b> the held item, spending data and XP levels on an enchantment. Enchantments have sci-fi names, for example Sharpness is “Monomolecular Edge”.</li>
+  </ul>
+  <h2>Modification Bench</h2>
+  <p>Install disks onto gear. Installing costs 2 XP levels and 50 credits per level. Merging two identical disks costs 3 XP levels. It also repairs gear: each Hull Alloy restores 25%.</p>
+  <h2>Disk list</h2>
+  <div class="tw"><table>
+    <tr><th>Disk</th><th class="n">Max</th><th>Fits</th><th>Effect</th><th>Research cost</th></tr>
+    <tr><td>Ion Discharge</td><td class="n">3</td><td>Melee</td><td>Chance to arc lightning into nearby hostiles</td><td>220 data, 2 alloy, 2 crystals</td></tr>
+    <tr><td>Bio-Siphon</td><td class="n">3</td><td>Melee</td><td>Heals you for part of the damage you deal</td><td>260 data, 2 alloy, 1 crystal, 1 ghast tear</td></tr>
+    <tr><td>Stasis Field</td><td class="n">3</td><td>Melee, phaser</td><td>Chance to slow your target</td><td>240 data, 2 alloy, 2 crystals</td></tr>
+    <tr><td>Xeno Bane</td><td class="n">5</td><td>Melee</td><td>Extra damage against hostile creatures</td><td>200 data, 2 alloy, 1 crystal</td></tr>
+    <tr><td>Overcharge</td><td class="n">3</td><td>Phaser</td><td>+12% beam damage per level, uses more charge</td><td>280 data, 3 alloy, 2 cells</td></tr>
+    <tr><td>Ricochet Matrix</td><td class="n">2</td><td>Phaser</td><td>Beams can jump to a second target</td><td>420 data, 4 alloy, 3 crystals, 1 relic</td></tr>
+    <tr><td>Matter Reclaimer</td><td class="n">1</td><td>Mining tools</td><td>Ores and sand come out refined</td><td>450 data, 6 alloy, 3 crystals</td></tr>
+    <tr><td>Tractor Beam</td><td class="n">1</td><td>Mining tools, melee</td><td>Drops go straight into your inventory</td><td>400 data, 4 alloy, 2 crystals, 2 ender pearls</td></tr>
+    <tr><td>Excavation Field</td><td class="n">1</td><td>Mining Laser, Geo-Pick</td><td>Mines 3×3 (sneak for one block); the laser's wide beam becomes 5×5</td><td>500 data, 6 alloy, 4 crystals, 2 cells</td></tr>
+    <tr><td>Geo-Pulse</td><td class="n">3</td><td>Mining Laser, Geo-Pick</td><td>Sometimes reveals ores around you</td><td>240 data, 2 alloy, 2 crystals</td></tr>
+    <tr><td>Life Support</td><td class="n">3</td><td>Helmet</td><td>O₂ tanks last longer; breathe underwater</td><td>220 data, 2 alloy, 1 cell</td></tr>
+    <tr><td>Hazard Shielding</td><td class="n">2</td><td>Chestplate</td><td>Resists hostile planet effects (immune at II)</td><td>220 data, 3 alloy, 1 crystal</td></tr>
+    <tr><td>Thermal Regulator</td><td class="n">4</td><td>Leggings</td><td>−15% heat and cold damage per level</td><td>200 data, 2 alloy, 1 crystal</td></tr>
+    <tr><td>Grav Stabilizers</td><td class="n">4</td><td>Boots</td><td>−20% fall damage per level</td><td>200 data, 2 alloy, 4 feathers</td></tr>
+    <tr><td>Self-Repair Matrix</td><td class="n">3</td><td>Anything</td><td>Slowly repairs itself</td><td>300 data, 3 alloy, 2 crystals, 1 cell</td></tr>
+  </table></div>
+  <p>The research cost shown is for level I. You also find disks in alien-site crates (about 18%) and as away mission rewards (12% + 2% per danger).</p>
+</article>
+
+<!-- ============================================================ REPLICATOR -->
+<article id="replicator" data-title="Replicator">
+  <h1>Replicator</h1>
+  <p class="lede-from">From Frontier Wiki · how everything gets made</p>
+  <p>There are no crafting tables or furnaces on Frontier. Vanilla crafting is off. Everything is made at a <b>Replicator</b>: the one built into your ship's Engineering department, Replicator terminals at the Academy and stations, or a Replicator Station you place yourself.</p>
+  <h2>Matter</h2>
+  <p>The Replicator runs on <b>matter</b>. Put items into the <b>Recycle</b> tab to break them down into matter. Recycling returns 50% of an item's matter value, so it's never a 1:1 converter. Hauler hulls hold twice as much matter and get +15% from recycling. See <a href="#matter">Matter values</a> for what each item is worth.</p>
+  <h2>Tabs</h2>
+  <ul>
+    <li><b>From matter:</b> consumables, tools, building supplies and furniture.</li>
+    <li><b>From materials:</b> recipes paid for with what's in your inventory, such as armor, Hull Alloy, Energy Cells and utility items.</li>
+    <li><b>Construction:</b> building blocks, including <b>Station Parts</b> for station plots.</li>
+    <li><b>Refinery:</b> ore to ingots, logs to planks and sand to glass. Pick what to refine and it's done instantly. It's <b>free</b>: no fuel, no matter.</li>
+    <li><b>Workshop:</b> phaser and tricorder upgrades, and phaser repair.</li>
+  </ul>
+  <h2>From matter (selected)</h2>
+  <div class="tw"><table>
+    <tr><th>Recipe</th><th class="n">Makes</th><th class="n">Matter</th></tr>
+    <tr><td>Energy Cells</td><td class="n">2</td><td class="n">20</td></tr>
+    <tr><td>Nutrient Bars</td><td class="n">6</td><td class="n">5</td></tr>
+    <tr><td>Ration Packs</td><td class="n">4</td><td class="n">6</td></tr>
+    <tr><td>Field Meals</td><td class="n">4</td><td class="n">5</td></tr>
+    <tr><td>Med-pack Ration</td><td class="n">1</td><td class="n">45</td></tr>
+    <tr><td>O₂ Air Tank</td><td class="n">1</td><td class="n">50</td></tr>
+    <tr><td>Lume Orbs (light)</td><td class="n">16</td><td class="n">3</td></tr>
+    <tr><td>Hull Alloy</td><td class="n">1</td><td class="n">140</td></tr>
+    <tr><td>Viewport glass / Hull plating / Deck plating</td><td class="n">16</td><td class="n">6–8</td></tr>
+    <tr><td>Light panels</td><td class="n">4</td><td class="n">20</td></tr>
+    <tr><td>Storage Crate</td><td class="n">1</td><td class="n">45</td></tr>
+    <tr><td>Storage Module</td><td class="n">1</td><td class="n">120</td></tr>
+    <tr><td>Wireless Tablet</td><td class="n">1</td><td class="n">300</td></tr>
+    <tr><td>Replicator Terminal</td><td class="n">1</td><td class="n">300</td></tr>
+    <tr><td>Docking Port</td><td class="n">1</td><td class="n">400</td></tr>
+    <tr><td>Storage Controller</td><td class="n">1</td><td class="n">600</td></tr>
+    <tr><td>Mod Bench</td><td class="n">1</td><td class="n">600</td></tr>
+    <tr><td>Research Bench</td><td class="n">1</td><td class="n">900</td></tr>
+    <tr><td>Antimatter Vault</td><td class="n">1</td><td class="n">1,200</td></tr>
+    <tr><td>Replicator Station</td><td class="n">1</td><td class="n">1,500</td></tr>
+  </table></div>
+  <h2>From materials (selected)</h2>
+  <div class="tw"><table>
+    <tr><th>Recipe</th><th>Cost</th></tr>
+    <tr><td>Energy Cells ×4</td><td>1 Warp Crystal, 2 redstone</td></tr>
+    <tr><td>Energy Cells ×2 (carbon)</td><td>3 coal, 2 redstone</td></tr>
+    <tr><td>Energy Cells ×2 (field charge)</td><td>2 coal, 2 raw copper</td></tr>
+    <tr><td>Hull Alloy</td><td>4 iron ingots, 3 copper ingots, 1 crystal</td></tr>
+    <tr><td>Hull Alloy ×2 (gold-tempered)</td><td>6 iron ingots, 2 gold ingots, 1 crystal</td></tr>
+    <tr><td>O₂ Air Tank</td><td>3 glass, 2 iron ingots, 1 crystal (or 2 alloy, 1 cell, 8 kelp)</td></tr>
+    <tr><td>EVA Suit (4 pieces)</td><td>11 alloy, 4 cells, 14 white wool, 216 credits in total</td></tr>
+    <tr><td>Phaser Rifle</td><td>10 alloy, 4 cells, 4 crystals, 2 diamonds, 450 credits</td></tr>
+    <tr><td>Fluid Canister (bucket)</td><td>3 iron ingots</td></tr>
+    <tr><td>Shears / Fishing rod / Plasma Igniter</td><td>Iron ingots plus string or flint</td></tr>
+    <tr><td>Sticks / Bowls / Paper</td><td>Planks or sugar cane</td></tr>
+  </table></div>
+</article>
+
+<!-- ============================================================ MATTER -->
+<article id="matter" data-title="Matter values">
+  <h1>Matter values</h1>
+  <p class="lede-from">From Frontier Wiki · what recycling gives you</p>
+  <p>Each item has a matter value. Recycling gives you <b>half</b> of it, and items the Replicator makes can't be recycled for a profit. Anything not listed is worth 0.2 matter each, so 64 of it gives 6.4 matter after recycling.</p>
+  <div class="tw"><table>
+    <tr><th>Item</th><th class="n">Matter value</th><th class="n">You get (×0.5)</th></tr>
+    <tr><td>Dirt, grass, netherrack</td><td class="n">0.04</td><td class="n">0.02</td></tr>
+    <tr><td>Stone, cobblestone, deepslate, sand, gravel, tuff, basalt, andesite, diorite, granite, calcite, blackstone</td><td class="n">0.06</td><td class="n">0.03</td></tr>
+    <tr><td>Planks</td><td class="n">0.15</td><td class="n">0.075</td></tr>
+    <tr><td>Rotten flesh</td><td class="n">0.15</td><td class="n">0.075</td></tr>
+    <tr><td>Bone, string</td><td class="n">0.3</td><td class="n">0.15</td></tr>
+    <tr><td>Logs (any)</td><td class="n">0.6</td><td class="n">0.3</td></tr>
+    <tr><td>Charcoal, redstone, lapis</td><td class="n">0.8</td><td class="n">0.4</td></tr>
+    <tr><td>Coal</td><td class="n">1</td><td class="n">0.5</td></tr>
+    <tr><td>Raw copper, quartz, amethyst shard</td><td class="n">1.5</td><td class="n">0.75</td></tr>
+    <tr><td>Copper ingot</td><td class="n">2.5</td><td class="n">1.25</td></tr>
+    <tr><td>Raw iron</td><td class="n">3</td><td class="n">1.5</td></tr>
+    <tr><td>Blaze rod</td><td class="n">4</td><td class="n">2</td></tr>
+    <tr><td>Raw gold</td><td class="n">4.5</td><td class="n">2.25</td></tr>
+    <tr><td>Iron ingot, ender pearl</td><td class="n">5</td><td class="n">2.5</td></tr>
+    <tr><td>Gold ingot</td><td class="n">7</td><td class="n">3.5</td></tr>
+    <tr><td>Emerald</td><td class="n">20</td><td class="n">10</td></tr>
+    <tr><td>Diamond</td><td class="n">40</td><td class="n">20</td></tr>
+    <tr><td>Netherite scrap</td><td class="n">80</td><td class="n">40</td></tr>
+    <tr><td>Anything else</td><td class="n">0.2</td><td class="n">0.1</td></tr>
+  </table></div>
+  <p>Refining raw ore into ingots before recycling gives more matter. Raw iron gives 1.5 and an iron ingot 2.5, and the Refinery is free.</p>
+</article>
+
+<!-- ============================================================ ENERGY CELLS -->
+<article id="energy-cells" data-title="Energy cells">
+  <h1>Energy cells</h1>
+  <p class="lede-from">From Frontier Wiki · power for your gear</p>
+  <p>Energy Cells power phasers, the plasma sword, the Mining Laser, the tricorder, med injectors and grav thrusters. Each cell is 100 charge. New captains start with a handful, so you'll need to make more.</p>
+  <h2>Ways to get cells</h2>
+  <ol>
+    <li><b>Field charge (no ship needed):</b> 2 coal + 2 raw copper makes 2 cells at any Replicator terminal. Both are easy to mine in the Frontier Wilds.</li>
+    <li><b>Carbon:</b> 3 coal + 2 redstone makes 2 cells.</li>
+    <li><b>Crystal:</b> 1 Warp Crystal + 2 redstone makes 4 cells, the best rate.</li>
+    <li><b>From matter:</b> 20 matter makes 2 cells.</li>
+    <li><b>Buy:</b> 10 credits each from the Quartermaster.</li>
+    <li><b>Rewards:</b> orientation gives 6 cells, and site crates and loot often hold some.</li>
+  </ol>
+  <p>The <b>Geo-Pick</b> mines without using any cells, so use it for bulk digging and save cells for the laser.</p>
+</article>
+
+<!-- ============================================================ ECONOMY -->
+<article id="economy" data-title="Money and trading">
+  <h1>Money and trading</h1>
+  <p class="lede-from">From Frontier Wiki · credits</p>
+  <h2>Wallet and ship fund</h2>
+  <p><code>/wallet</code> shows your credits, and <code>/wallet pay &lt;player&gt; &lt;amount&gt;</code> sends some to another player. Each ship has a <b>ship fund</b> that crew pay into with <code>/ship fund add &lt;amount|all&gt;</code>. The captain and first officer spend it on refits, modules, fuel and Outpost Beacons. Contract rewards and sales go into your own wallet.</p>
+  <h2>Selling</h2>
+  <p>You can only sell at the <b>Station Exchange</b> on <a href="#nexus">Nexus Station</a>. Some prices it pays per item:</p>
+  <div class="tw"><table>
+    <tr><th>Item</th><th class="n">Credits</th><th>Item</th><th class="n">Credits</th></tr>
+    <tr><td>Precursor Relic</td><td class="n">1,800</td><td>Nether star</td><td class="n">900</td></tr>
+    <tr><td>Netherite ingot</td><td class="n">420</td><td>Heart of the sea</td><td class="n">250</td></tr>
+    <tr><td>Alien Artifact</td><td class="n">140</td><td>Netherite scrap</td><td class="n">90</td></tr>
+    <tr><td>Ancient debris</td><td class="n">80</td><td>Raw gold block</td><td class="n">55</td></tr>
+    <tr><td>Hull Alloy</td><td class="n">30</td><td>Diamond</td><td class="n">28</td></tr>
+    <tr><td>Raw iron block</td><td class="n">28</td><td>Echo shard</td><td class="n">22</td></tr>
+    <tr><td>Warp Crystal</td><td class="n">15</td><td>Emerald</td><td class="n">14</td></tr>
+    <tr><td>Gold ingot</td><td class="n">8</td><td>Raw gold</td><td class="n">6</td></tr>
+    <tr><td>Iron ingot</td><td class="n">4</td><td>Raw iron</td><td class="n">3</td></tr>
+  </table></div>
+  <p>Exotic samples sell for the value printed on them. Trader hulls get +15% and the Free Trade Syndicate alliance another +15%.</p>
+  <h2>Buying</h2>
+  <p>The Exchange also sells supplies, for example Warp Crystals at 40, Hull Alloy at 75 and Energy Cells at 8. On Earth, the <b>Quartermaster</b> (<code>/qm</code>) sells starter gear.</p>
+  <h2>Trading with players</h2>
+  <p>Use <code>/trade &lt;name&gt;</code> or sneak + right-click a player. Click your items to offer them; the gold nugget adds credits. When both players click <b>Confirm</b>, the swap happens after a short countdown.</p>
+</article>
+
+<!-- ============================================================ CONTRACTS -->
+<article id="contracts" data-title="Contracts">
+  <h1>Contracts</h1>
+  <p class="lede-from">From Frontier Wiki · the job board</p>
+  <div class="infobox"><div class="ih">Contract board</div><dl>
+    <dt>Command</dt><dd><code>/jobs</code></dd>
+    <dt>Offers</dt><dd>7 (diplomats +2)</dd>
+    <dt>Active</dt><dd>3 at a time</dd>
+    <dt>Refresh</dt><dd>Every 30 minutes</dd>
+  </dl></div>
+  <p>Open <code>/jobs</code>, or Ship Operations → Contracts, to see offers for planets your hull can reach. Nearer worlds come up more often. Pay grows with danger, distance and how much is asked, and airless worlds pay 15% more.</p>
+  <h2>Contract types</h2>
+  <div class="tw"><table>
+    <tr><th>Type</th><th>What you do</th></tr>
+    <tr><td>Gather</td><td>Bring resources from that planet, plus exotic samples</td></tr>
+    <tr><td>Specimen</td><td>Collect exotic samples (surface, deep, life or special)</td></tr>
+    <tr><td>Hunt</td><td>Kill hostiles on that world, sometimes plus tissue samples. Not offered on danger-0 worlds.</td></tr>
+    <tr><td>Survey</td><td>Take tricorder readings at least 150 blocks apart</td></tr>
+    <tr><td>Mining</td><td>Mine Warp Crystal or Hull Alloy deposits</td></tr>
+    <tr><td>Site recovery</td><td>Find an alien site (a compass points to the nearest; any site counts) and bring deep samples</td></tr>
+    <tr><td>Delivery</td><td>Haul supplies such as cells, air tanks, rations or glass</td></tr>
+    <tr><td>Bounty</td><td>Bring Alien Artifacts, or Precursor Relics on danger 3+ worlds, plus a sample</td></tr>
+  </table></div>
+  <p>Exotic samples drop only on their own world. Drop chances double while a contract wants them.</p>
+</article>
+
+<!-- ============================================================ MISSIONS -->
+<article id="missions" data-title="Away missions">
+  <h1>Away missions</h1>
+  <p class="lede-from">From Frontier Wiki · story missions on every planet</p>
+  <p>Every planet has three away missions. Open <code>/missions</code> to accept up to two at once. A mission is a chain of steps, and the action bar shows a compass to your next objective.</p>
+  <h2>Step types</h2>
+  <ul>
+    <li><b>Waypoint:</b> reach a marked spot. A light pillar shows when you're within 96 blocks.</li>
+    <li><b>Recover:</b> pick up an item at the waypoint and keep it until you return.</li>
+    <li><b>Deploy:</b> right-click the given item at the marked site.</li>
+    <li><b>Scan:</b> take a tricorder reading at the marked site.</li>
+    <li><b>Life-sign scan:</b> sneak + right-click the tricorder near at least two creatures.</li>
+    <li><b>Survey:</b> atmospheric readings at least 150 blocks apart.</li>
+    <li><b>Find an alien site:</b> follow the compass. Any site on the planet counts, even one you've already found. Later steps then point to that site.</li>
+    <li><b>Samples, kills, deposits:</b> collect, defeat or mine the given number.</li>
+    <li><b>Return:</b> go back to your ship.</li>
+  </ul>
+  <h2>Mission types</h2>
+  <p>Mission types include distress signals, lost probes, precursor ruins, wrecked freighters, smuggler caches, navigation beacons, relay networks, weather buoys, spill surveys, predator hunts and precursor relic vaults. Site missions only appear on planets that have alien sites, and hunts only on dangerous worlds.</p>
+  <h2>Rewards</h2>
+  <ul>
+    <li>Credits, scaled by danger and length (base 450).</li>
+    <li>An Alien Artifact (25% + 8% per danger).</li>
+    <li>A Precursor Relic: guaranteed for “The &lt;planet&gt; Relic” missions, 35% for “Ruins of &lt;planet&gt;”, and 6% × danger on danger 4+ for the rest.</li>
+    <li>A data disk (12% + 2% per danger) and often Warp Crystals.</li>
+  </ul>
+</article>
+
+<!-- ============================================================ CAMPAIGN -->
+<article id="campaign" data-title="The Precursor Signal">
+  <h1>The Precursor Signal</h1>
+  <p class="lede-from">From Frontier Wiki · the crew campaign · <code>/story</code></p>
+  <p>After graduating, your crew follows the <b>Precursor Signal</b>: six chapters of five quests. The bar on screen shows your current quest, and <code>/story</code> opens the Mission Log. Progress belongs to the whole ship. Finishing chapters unlocks hull sizes, the Outlands and finally the Destiny.</p>
+  <h2>Chapter 1: First Light</h2>
+  <p><i>Unlocks size 2 hulls. Chapter reward: 2,000 credits, 15 alloy.</i></p>
+  <ol><li>Shakedown Cruise: dock at Nexus Station.</li><li>Earning Your Keep: complete a contract and mine 8 crystal or alloy deposits.</li><li>Boots on the Ground: beam down to 2 worlds and run 3 tricorder scans on planets.</li><li>The Pulse: bring back an Alien Artifact.</li><li>Listening Post: analyze 10 research data and complete an away mission.</li></ol>
+  <h2>Chapter 2: Echoes in the Dark</h2>
+  <p><i>Unlocks size 3. Reward: 5,000 credits, 35 alloy, 1 data disk.</i></p>
+  <ol><li>A Bigger Boat: commission a size 2 hull.</li><li>Fly Your Colors: name your faction, choose its symbol and pledge to an alliance.</li><li>Past the Veil: chart 2 frontier sectors.</li><li>Ghost Ships: salvage 3 components from wrecks and analyze 50 research data.</li><li>Field Work: research a data disk, complete 2 away missions (danger 2+) and bring back 2 Alien Artifacts.</li></ol>
+  <h2>Chapter 3: Reavers</h2>
+  <p><i>Unlocks size 4. Reward: 12,000 credits, 70 alloy.</i></p>
+  <ol><li>Armor Up: commission a size 3 hull.</li><li>Thin Air: land on an airless world (danger 2+) and scan 2 airless worlds.</li><li>Rock Hoppers: mine 20 alloy in asteroid fields.</li><li>First Contact: defeat 30 hostiles (danger 2+) and drive off a raider attack.</li><li>Race for the Pieces: bring back 3 Alien Artifacts and complete 2 contracts.</li></ol>
+  <h2>Chapter 4: Deep Survey</h2>
+  <p><i>Unlocks size 5 and the Outlands. Reward: 22,000 credits, 140 alloy, 2 data disks.</i></p>
+  <ol><li>Heavy Metal: commission a size 4 hull.</li><li>A Place to Call Home: establish a starbase.</li><li>Into the Deep: chart 3 deep sectors.</li><li>The Long Haul: complete 3 contracts and 2 away missions (danger 3+).</li><li>The Whole Relic: combine two data disks and recover a Precursor Relic.</li></ol>
+  <h2>Chapter 5: The Gatekeepers</h2>
+  <p><i>Unlocks size 6. Reward: 40,000 credits, 220 alloy.</i></p>
+  <ol><li>Capital Ship: commission a size 5 hull.</li><li>Alliance Business: complete 2 away missions (danger 4+) and 3 contracts.</li><li>Guardians: defeat a lost-city guardian and 20 hostiles (danger 4+).</li><li>Blackmoor Haven: dock at Blackmoor Haven and scan 5 danger 4+ worlds.</li><li>Resonance: recover 2 Precursor Relics.</li></ol>
+  <h2>Chapter 6: The Signal</h2>
+  <p><i>Unlocks the Destiny. Reward: 65,000 credits, 400 alloy, 2 Precursor Relics.</i></p>
+  <ol><li>The Edge of the Map: commission a size 6 hull and chart 2 sectors at the galaxy's edge.</li><li>Call to Arms: fight in a world siege (attack or defend).</li><li>The Spires: win a world siege and complete 2 danger-5 away missions.</li><li>Blackmoor Rising: fight for Blackmoor Haven, or hold it.</li><li>The Answer: bring 3 Precursor Relics.</li></ol>
+  <p>Each quest also pays credits, from 250 in Chapter 1 up to 7,000 in Chapter 6.</p>
+  <div class="note"><b>Tip</b>For the relic quests, look for “The &lt;planet&gt; Relic” away missions. They always pay a relic.</div>
+</article>
+
+<!-- ============================================================ STARBASES -->
+<article id="starbases" data-title="Starbases and station plots">
+  <h1>Starbases and station plots</h1>
+  <p class="lede-from">From Frontier Wiki · a home in space · <code>/starbase</code></p>
+  <h2>Starbases</h2>
+  <p>Browse 40 ready-built stations with <code>/starbase</code>, from the Spindle at 10,000 credits up to the Citadel at 200,000. You can take a tour first with <code>/starbase tour &lt;id&gt;</code>. Warp home and your ship docks; walk through the airlock to go aboard.</p>
+  <ul>
+    <li><code>/starbase home</code>: go to your starbase.</li>
+    <li><code>/starbase sell &lt;price&gt;</code>: list it on the pre-owned market. The minimum is 1,000.</li>
+    <li><code>/starbase market</code>: buy a pre-owned starbase.</li>
+    <li><b>Trade-in:</b> buying a new starbase while you own one credits 60% of the old design's price.</li>
+    <li>While you're docked, a scale model of your starbase shows out the bridge windows.</li>
+    <li><code>/ship invite</code> guests can visit your starbase too.</li>
+  </ul>
+  <h2>Station plots</h2>
+  <p>The first entry in <code>/starbase</code> is a <b>Station Plot</b> for 25,000 credits. It's an open 500-block-wide build zone, full world height, with a core at its center.</p>
+  <ul>
+    <li>Fly freely inside it (zero-g).</li>
+    <li>Air is unlimited: tanks refill and you can't drown.</li>
+    <li>Build with <b>Station Parts</b> from the Replicator, made from minerals mined on planets.</li>
+    <li>Place a <b>Docking Port</b> (400 matter) where your ship should dock. Until you do, the airlock is on a small starter deck near the plot's edge, out of your way.</li>
+  </ul>
+</article>
+
+<!-- ============================================================ OUTPOSTS -->
+<article id="outposts" data-title="Outposts">
+  <h1>Outposts</h1>
+  <p class="lede-from">From Frontier Wiki · a permanent base on the ground · <code>/outpost</code></p>
+  <p>An <b>Outpost Beacon</b> from the Outpost Office on Nexus Station costs 2,500 credits and 40 Hull Alloy. Carrier hulls pay half. It gives you a permanent outpost in its own world that doesn't reset like planets do.</p>
+  <ul>
+    <li>The build area is 193 × 193 blocks, from 48 below to 120 above the base.</li>
+    <li>Buy <b>prefab kits</b> and sci-fi furniture at the Outpost Office.</li>
+    <li><code>/outpost name &lt;name&gt;</code>, <code>/outpost public</code> and <code>/outpost private</code>.</li>
+    <li>Air tanks refill at your outpost, and your ship can dock there.</li>
+  </ul>
+</article>
+
+<!-- ============================================================ FACTIONS -->
+<article id="factions" data-title="Factions and alliances">
+  <h1>Factions and alliances</h1>
+  <p class="lede-from">From Frontier Wiki · <code>/faction</code></p>
+  <p>Every crew is a <b>faction</b> named after its ship. The captain chooses a symbol and pledges the faction to one of three <b>alliances</b> with <code>/faction</code>. You can change alliance once every 7 days. <code>/faction top</code> shows the leading crews, and <code>/faction map</code> shows the Outlands conquest map.</p>
+  <div class="tw"><table>
+    <tr><th>Alliance</th><th>Symbol</th><th>About</th><th>Perks</th></tr>
+    <tr><td>Frontier Federation</td><td>✪</td><td>The old order of the core worlds</td><td>+20% contract and mission pay, −10% warp fuel</td></tr>
+    <tr><td>Free Trade Syndicate</td><td>⚖</td><td>Neutral merchants and smugglers</td><td>+15% on everything you sell, +10% tribute, +5% contract pay</td></tr>
+    <tr><td>Vorr Ascendancy</td><td>☬</td><td>An alien power pushing in from beyond the rim</td><td>+12% phaser damage against players, seize worlds 25% faster, +10% tribute</td></tr>
+  </table></div>
+  <p>Nameplates show your alliance symbol, your faction (ship name) and your crew position.</p>
+</article>
+
+<!-- ============================================================ OUTLANDS -->
+<article id="outlands" data-title="The Outlands">
+  <h1>The Outlands</h1>
+  <p class="lede-from">From Frontier Wiki · the lawless rim</p>
+  <p>The <b>Outlands</b> is a lawless sector at the galaxy's eastern edge, unlocked by Chapter 4 of the campaign. Everything there is PvP. Its outlaw station is <b>Blackmoor Haven</b>; <code>/ship course outlaw</code> takes you there.</p>
+  <h2>Outlaw Armory</h2>
+  <div class="tw"><table>
+    <tr><th>Item</th><th class="n">Price</th><th>Notes</th></tr>
+    <tr><td>Marauder Rig (helmet / chest / legs / boots)</td><td class="n">6,000 / 9,500 / 8,000 / 5,500</td><td>Outlaw-forged, never breaks</td></tr>
+    <tr><td>Outlaw Disruptor (rifle)</td><td class="n">12,000</td><td>Overcharge III, Ricochet II, Stasis III</td></tr>
+    <tr><td>Reaver Hand Cannon (phaser)</td><td class="n">7,500</td><td>Overcharge III, Stasis II, Self-Repair III</td></tr>
+    <tr><td>Reaver Blade (sword)</td><td class="n">10,000</td><td>Bio-Siphon III, Ion Discharge III, Xeno Bane V, Self-Repair III</td></tr>
+    <tr><td>Smuggler's Cutter (laser)</td><td class="n">8,000</td><td>Tractor Beam, Matter Reclaimer, Self-Repair III</td></tr>
+    <tr><td>Precursor Exosuit chest (salvaged)</td><td class="n">15,000</td><td></td></tr>
+  </table></div>
+  <p>The fence at Blackmoor Haven pays 1.25× station prices.</p>
+  <h2>Seizing worlds</h2>
+  <p>Beam down to an Outlands world and use the <b>claim spire</b> at its center. Hold it for 5 minutes. You must be pledged to an alliance.</p>
+  <ul>
+    <li>Everyone in the attacking and defending alliances fights, not only the crews involved.</li>
+    <li>The clock only runs while attackers outnumber defenders within 16 blocks of the spire. Each extra attacker adds 25% speed, up to double.</li>
+    <li>Attackers can step away for up to 30 seconds before the seizure fails.</li>
+    <li>A world that just changed hands is shielded for 15 minutes.</li>
+    <li>Held worlds pay 300 credits an hour in tribute, 25% more on danger-5 worlds.</li>
+    <li><code>/assist</code> beams you into your alliance's battle, with a 2-minute cooldown.</li>
+  </ul>
+  <h2>Blackmoor Haven siege</h2>
+  <p>Alliances fight for the Haven's control core, a beacon near the arrival pad. Use <code>/haven</code> for status, and <code>/haven siege</code> in the core room to attack. Hold the core room with more fighters than the defenders for 10 minutes. Afterward it's shielded for 6 hours.</p>
+  <p>The holding alliance gets 20% off outlaw gear and +10% at the fence. It also gets 3,000 credits an hour of tribute, shared by crews who fought for it in the last 7 days.</p>
+</article>
+
+<!-- ============================================================ PVP -->
+<article id="pvp" data-title="PvP and bounties">
+  <h1>PvP and bounties</h1>
+  <p class="lede-from">From Frontier Wiki · player combat</p>
+  <h2>Where PvP is on</h2>
+  <p>PvP is only on danger-5 worlds and in the Outlands. Everywhere else (ships, stations, outposts, the Academy, other planets) it's off. Crewmates can never hurt each other.</p>
+  <h2>Rules</h2>
+  <ul>
+    <li>If a player kills you in a PvP zone, <b>everything you carry drops</b> and the killer takes 20% of your wallet, up to 50,000.</li>
+    <li>A PvP hit tags both players for 15 seconds. While tagged you can't beam out or use escape commands such as <code>/spawn</code>, <code>/home</code>, <code>/tpa</code> or <code>/warp</code>.</li>
+    <li>Logging out while tagged drops your gear to whoever hit you last.</li>
+    <li>PvP worlds pay 1.5× on contracts and exotic samples, and keep landing sites at least 250 blocks apart.</li>
+  </ul>
+  <h2>Bounties</h2>
+  <p>Use <code>/bounty place &lt;player&gt; &lt;amount&gt;</code> (minimum 100, plus a 5% posting fee) and <code>/bounty</code> to see the board. <code>/bounty cancel &lt;player&gt;</code> withdraws yours with a 75% refund. Whoever kills the target in a PvP zone collects the bounty.</p>
+</article>
+
+<!-- ============================================================ COMMANDS -->
+<article id="commands" data-title="Player commands">
+  <h1>Player commands</h1>
+  <p class="lede-from">From Frontier Wiki · every command a player can use</p>
+  <h2>Ship</h2>
+  <div class="tw"><table>
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td><code>/ship claim</code></td><td>Commission your first shuttle (on Earth, after graduating)</td></tr>
+    <tr><td><code>/ship board</code></td><td>Beam up to your ship in orbit</td></tr>
+    <tr><td><code>/ship info</code></td><td>Ship status</td></tr>
+    <tr><td><code>/ship name &lt;name&gt;</code></td><td>Rename your ship (and faction)</td></tr>
+    <tr><td><code>/ship crew add|remove|list &lt;player&gt;</code></td><td>Manage crew</td></tr>
+    <tr><td><code>/ship crew promote|demote|rank|menu &lt;player&gt;</code></td><td>Crew ranks and rights</td></tr>
+    <tr><td><code>/ship leave &lt;captain&gt;</code></td><td>Leave a crew</td></tr>
+    <tr><td><code>/ship invite|uninvite &lt;player&gt;</code></td><td>Guests for your ship and starbase</td></tr>
+    <tr><td><code>/ship guests</code></td><td>Your guest list</td></tr>
+    <tr><td><code>/ship visit &lt;player&gt;</code></td><td>Visit a ship you're invited to</td></tr>
+    <tr><td><code>/ship asteroids</code></td><td>Beam to this system's asteroid field</td></tr>
+    <tr><td><code>/ship course &lt;earth|port|outlaw|system|clear&gt;</code></td><td>Plot a multi-jump course</td></tr>
+    <tr><td><code>/ship map</code></td><td>A Galaxy Map to hold</td></tr>
+    <tr><td><code>/ship pod</code></td><td>Beam your field cargo pod to you (hauler hulls)</td></tr>
+    <tr><td><code>/ship npcs on|off</code></td><td>Show or hide your shipboard crew NPCs (captain or first officer)</td></tr>
+    <tr><td><code>/ship fund add &lt;amount|all&gt;</code></td><td>Pay into the ship fund</td></tr>
+  </table></div>
+  <h2>Everything else</h2>
+  <div class="tw"><table>
+    <tr><th>Command</th><th>Aliases</th><th>What it does</th></tr>
+    <tr><td><code>/guide</code></td><td>handbook, manual</td><td>A new Frontier Field Manual</td></tr>
+    <tr><td><code>/jobs</code></td><td>contracts</td><td>Contract board</td></tr>
+    <tr><td><code>/missions</code></td><td>away</td><td>Away missions</td></tr>
+    <tr><td><code>/story</code></td><td>log, campaign</td><td>Mission Log (campaign)</td></tr>
+    <tr><td><code>/wallet</code></td><td>credits</td><td>Your credits; <code>/wallet pay &lt;player&gt; &lt;amount&gt;</code></td></tr>
+    <tr><td><code>/trade &lt;player&gt;</code></td><td>tr</td><td>Trade items and credits (accept, deny, cancel)</td></tr>
+    <tr><td><code>/quartermaster</code></td><td>qm</td><td>Buy starter gear (Earth)</td></tr>
+    <tr><td><code>/suit</code></td><td>pack, pouch</td><td>Suit storage (or sneak + F)</td></tr>
+    <tr><td><code>/starbase</code></td><td>sb</td><td>Buy, tour, go home, sell, market</td></tr>
+    <tr><td><code>/outpost</code></td><td>base</td><td>Your outpost; name, public, private</td></tr>
+    <tr><td><code>/faction</code></td><td>f, alliance</td><td>Alliances, symbol, top crews, map</td></tr>
+    <tr><td><code>/assist</code></td><td>rally</td><td>Beam into your alliance's battle</td></tr>
+    <tr><td><code>/haven</code></td><td></td><td>Blackmoor Haven status; <code>/haven siege</code></td></tr>
+    <tr><td><code>/bounty</code></td><td>bounties</td><td>Board; place, cancel</td></tr>
+  </table></div>
+  <h2>Controls</h2>
+  <div class="tw"><table>
+    <tr><th>Action</th><th>Result</th></tr>
+    <tr><td>Right-click comm badge</td><td>Beam to ship</td></tr>
+    <tr><td>Sneak + right-click comm badge</td><td>Emergency recall to Earth</td></tr>
+    <tr><td>Click with phaser</td><td>Fire</td></tr>
+    <tr><td>Sneak + right-click phaser</td><td>Switch stun/kill</td></tr>
+    <tr><td>Right-click tricorder</td><td>Mineral scan</td></tr>
+    <tr><td>Sneak + right-click tricorder</td><td>Life-sign scan</td></tr>
+    <tr><td>F with tricorder (with filter)</td><td>Cycle the ore filter</td></tr>
+    <tr><td>Sneak with Mining Laser</td><td>Switch between focused and wide beam</td></tr>
+    <tr><td>Sneak + F</td><td>Open suit storage</td></tr>
+    <tr><td>Sneak + right-click a player</td><td>Trade</td></tr>
+  </table></div>
+</article>
+
+<!-- ============================================================ FAQ -->
+<article id="faq" data-title="Frequently asked questions">
+  <h1>Frequently asked questions</h1>
+  <p class="lede-from">From Frontier Wiki · quick answers</p>
+  <dl class="faq">
+    <dt>How do I get more Energy Cells?</dt>
+    <dd>At any Replicator terminal, 2 coal + 2 raw copper makes 2 cells. 1 Warp Crystal + 2 redstone makes 4. 20 matter makes 2. The Quartermaster sells them for 10 credits each. See <a href="#energy-cells">Energy cells</a>.</dd>
+    <dt>How do I smelt ore? There are no furnaces.</dt>
+    <dd>Use the <b>Refinery</b> tab of any Replicator. Choose what to refine and it's done instantly. It's free: no fuel and no matter.</dd>
+    <dt>Where do I mine before I have a ship?</dt>
+    <dd>Take the <b>Wilds Line</b> from the station on the south side of Frontier City to the Frontier Wilds camp. You can't dig inside the cities.</dd>
+    <dt>How do I get Precursor Relics?</dt>
+    <dd>“The &lt;planet&gt; Relic” away missions always pay one. “Ruins of &lt;planet&gt;” missions pay one 35% of the time. Alien-site crates have at least an 8% chance. See <a href="#alien-sites">Alien sites</a>.</dd>
+    <dt>My mission says “Find an alien site” but nothing happens.</dt>
+    <dd>Follow the compass on your action bar to the nearest site and walk into it. Any site on that planet counts, even one you've already visited. If it says no site is in range, explore further out.</dd>
+    <dt>How do I upgrade my ship?</dt>
+    <dd>Finish chapters of <a href="#campaign">the campaign</a> (<code>/story</code>) to unlock bigger sizes. Then refit at the Nexus Station shipyard using the ship fund and Hull Alloy. You can only go up one size at a time.</dd>
+    <dt>How do I add a friend to my crew?</dt>
+    <dd><code>/ship crew add &lt;name&gt;</code>. They have to have graduated from the Academy first. To let someone visit without joining, use <code>/ship invite &lt;name&gt;</code>.</dd>
+    <dt>Where do I sell things?</dt>
+    <dd>Only at the Station Exchange on Nexus Station. Use <code>/ship course port</code> to get there.</dd>
+    <dt>My stuff on a planet disappeared.</dt>
+    <dd>Planet worlds regenerate every 72 hours. Build on your ship, a starbase, a station plot or an outpost instead.</dd>
+    <dt>I'm stuck or lost on a planet.</dt>
+    <dd>Right-click your comm badge to beam back to your ship. If your ship isn't in orbit, sneak + right-click it and stand still for 10 seconds to recall to Earth.</dd>
+    <dt>I'm running out of air.</dt>
+    <dd>Carry an O₂ Air Tank on airless worlds. Tanks refill aboard ships, at stations, outposts and the Academy. A full space suit makes air last longer, and the Precursor Exosuit needs none.</dd>
+    <dt>I lost my comm badge / tricorder / field manual.</dt>
+    <dd>Badge: 40 matter at the Replicator or 60 credits from the Quartermaster. Tricorder: 140 matter or 150 credits. Field manual: <code>/guide</code>.</dd>
+    <dt>Why can't I break blocks on my ship?</dt>
+    <dd>The original hull is protected. You can only break blocks you or your crew placed, and you need the <i>build</i> right (Captain, First and Second Officer, Chief Engineer).</dd>
+    <dt>Can I use ender pearls to get out of a ship?</dt>
+    <dd>No. Pearls and chorus fruit are blocked aboard ships.</dd>
+    <dt>Why do my items show “◆ RARE” and so on?</dt>
+    <dd>That's the item's rarity. See <a href="#items">Items and rarity</a>.</dd>
+    <dt>Where is PvP allowed?</dt>
+    <dd>Only on danger-5 worlds and in the Outlands. See <a href="#pvp">PvP and bounties</a>.</dd>
+    <dt>What happens if I die?</dt>
+    <dd>You respawn on your ship. In a PvP zone, if a player kills you, you drop everything you carry and lose 20% of your wallet to them.</dd>
+    <dt>How do I get a bigger suit pouch?</dt>
+    <dd>Wear a better suit. EVA has 9 slots, Pathfinder 18, Assault 27, Vanguard 36 and Precursor 54.</dd>
+    <dt>What is the fastest money early on?</dt>
+    <dd>Take contracts on nearby worlds, sell Alien Artifacts (140 each) and Relics (1,800), and mine deposits. Pledging to the Federation adds 20% to contract pay, and the Syndicate adds 15% to sales.</dd>
+  </dl>
+</article>
+
+<p class="foot">Frontier Wiki · Afterlife: The New Frontier · Made by Seven. Values reflect the server's default configuration and may differ if staff have changed them.</p>
+</main>
+</div>
+
+<script>
+(function(){
+  var arts=[].slice.call(document.querySelectorAll('article'));
+  var links=[].slice.call(document.querySelectorAll('nav.side a'));
+  var side=document.getElementById('side'), btn=document.getElementById('menubtn');
+  var ids={}; arts.forEach(function(a){ids[a.id]=a;});
+  function show(id){
+    if(!ids[id]) id='main-page';
+    arts.forEach(function(a){a.classList.toggle('on',a.id===id);});
+    links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+id);});
+    document.title=(id==='main-page'?'Frontier Wiki':ids[id].dataset.title+' · Frontier Wiki');
+    side.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+  }
+  function route(){show((location.hash||'#main-page').slice(1));}
+  window.addEventListener('hashchange',route); route();
+  btn.addEventListener('click',function(){var o=side.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
+
+  // search index
+  var idx=arts.map(function(a){return{id:a.id,title:a.dataset.title,text:a.textContent.replace(/\s+/g,' ')};});
+  var q=document.getElementById('q'), res=document.getElementById('results'), sel=-1;
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function search(term){
+    var words=term.toLowerCase().split(/\s+/).filter(Boolean); if(!words.length) return [];
+    var out=[];
+    idx.forEach(function(d){
+      var t=d.title.toLowerCase(), x=d.text.toLowerCase(), score=0, ok=true;
+      words.forEach(function(w){var c=x.split(w).length-1; if(!c&&t.indexOf(w)<0) ok=false; score+=c+(t.indexOf(w)>=0?20:0);});
+      if(!ok) return;
+      var p=x.indexOf(words[0]); var s=Math.max(0,p-60);
+      var snip=(s>0?'…':'')+d.text.substr(s,160)+'…';
+      out.push({d:d,score:score,snip:snip});
+    });
+    return out.sort(function(a,b){return b.score-a.score;}).slice(0,10);
+  }
+  function hl(s,term){var h=esc(s);term.toLowerCase().split(/\s+/).filter(function(w){return w.length>1;}).forEach(function(w){h=h.replace(new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>');});return h;}
+  function render(){
+    var term=q.value.trim(); sel=-1;
+    if(!term){res.hidden=true;res.innerHTML='';return;}
+    var r=search(term);
+    res.innerHTML=r.length?r.map(function(x){return '<a href="#'+x.d.id+'"><span class="rt">'+esc(x.d.title)+'</span><span class="rs">'+hl(x.snip,term)+'</span></a>';}).join(''):'<a href="#faq"><span class="rt">No matches</span><span class="rs">Try fewer words, or browse the FAQ.</span></a>';
+    res.hidden=false;
+  }
+  q.addEventListener('input',render);
+  q.addEventListener('keydown',function(e){
+    var items=res.querySelectorAll('a'); if(res.hidden||!items.length) return;
+    if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(items.length-1,sel+1);}
+    else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(0,sel-1);}
+    else if(e.key==='Enter'){e.preventDefault();(items[sel<0?0:sel]).click();return;}
+    else if(e.key==='Escape'){res.hidden=true;return;}
+    items.forEach(function(a,i){a.classList.toggle('sel',i===sel);});
+  });
+  res.addEventListener('click',function(e){if(e.target.closest('a')){res.hidden=true;q.value='';}});
+  document.addEventListener('click',function(e){if(!e.target.closest('.search')) res.hidden=true;});
+})();
+</script>
+
+</body>
+</html>
