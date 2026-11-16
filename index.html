@@ -121,6 +121,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <a href="#academy">Frontier Academy</a>
   <a href="#orientation">Shipboard orientation</a>
   <a href="#faq">Frequently asked questions</a>
+  <a href="#journal">Captain's Log and titles</a>
   <h4>The world</h4>
   <a href="#sol">Sol and Frontier City</a>
   <a href="#nexus">Nexus Station</a>
@@ -128,12 +129,18 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <a href="#creatures">Creatures and bosses</a>
   <a href="#alien-sites">Alien sites and lost cities</a>
   <a href="#asteroids">Asteroid fields</a>
+  <a href="#vaults">Precursor vaults</a>
+  <a href="#colonies">Colonies</a>
   <h4>Ships</h4>
   <a href="#ship">Your ship</a>
+  <a href="#shipboard-crew">Shipboard crew</a>
   <a href="#hulls">Hull classes</a>
   <a href="#crew">Crew and ranks</a>
   <a href="#warp">Warp and navigation</a>
   <a href="#storage">Ship storage</a>
+  <a href="#cosmetics">Ship cosmetics</a>
+  <a href="#derelicts">Derelicts and distress calls</a>
+  <a href="#anomalies">Anomalies</a>
   <h4>Gear</h4>
   <a href="#badge">Comm badge</a>
   <a href="#tools">Tools and weapons</a>
@@ -206,7 +213,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <ul>
     <li>Open <code>/jobs</code> for contracts and <code>/missions</code> for away missions.</li>
     <li>Warp to a nearby planet from the Helm, step into the transporter and beam down.</li>
-    <li>Mine <b>Warp Crystal</b> (amethyst) and <b>Hull Alloy</b> (raw iron block) deposits underground. Crystals fuel your warp drive and alloy pays for hull refits.</li>
+    <li>Mine <b>Warp Crystal</b> (Resonance Crystal) and <b>Hull Alloy</b> (Ferrite Deposit) deposits underground. Crystals fuel your warp drive and alloy pays for hull refits.</li>
     <li>Sell cargo at the <b>Station Exchange</b> on <a href="#nexus">Nexus Station</a>.</li>
   </ul>
   <div class="note"><b>Starter kit</b>New captains get an O₂ Air Tank, 3 Energy Cells, 40 fuel and 25 credits. Graduation adds 250 credits and a full EVA Suit. Finishing orientation adds 150 credits and 6 Energy Cells.</div>
@@ -230,7 +237,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <tr><td class="n">1</td><td>Report</td><td>Commandant Reyes</td><td>Report to the Commandant in the Commissioning Office.</td></tr>
     <tr><td class="n">2</td><td>Field kit</td><td>Quartermaster</td><td>Collect your kit. You choose a <b>Type-2 Phaser</b> or a <b>Plasma Sword</b>.</td></tr>
     <tr><td class="n">3</td><td>Tricorder</td><td>Science</td><td>Right-click your tricorder to take a reading.</td></tr>
-    <tr><td class="n">4</td><td>Gather</td><td>Science</td><td>Gather 8 logs (any wood), 4 coal (charcoal or coal ore also count) and 4 raw iron (ingots or ore also count), then hand them in. You keep the items.</td></tr>
+    <tr><td class="n">4</td><td>Gather</td><td>Science</td><td>Gather 8 logs (any wood), 4 Carbon Chunks (Pyro-carbon or the ore also count) and 4 Raw Ferrite (Ferrite Ingots or Ferrite Ore also count), then hand them in. You keep the items.</td></tr>
     <tr><td class="n">5</td><td>Replicate</td><td>Science</td><td>Process your haul at a Replicator terminal. Use the Refinery for ore to ingots or logs to planks.</td></tr>
     <tr><td class="n">6</td><td>Med Bay</td><td>Doctor</td><td>Talk to the Doctor for a check-up, or lie on any Med Bay bed.</td></tr>
     <tr><td class="n">7</td><td>Phaser range</td><td>Tactical</td><td>Fire 10 shots at the range. Sword cadets get a loaner phaser.</td></tr>
@@ -359,8 +366,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p>Lower gravity means higher jumps, slower falls and softer landings. Every custom planet also gets its own variation on its class: flatter, rougher, more craters and so on. Danger-0 worlds are always breathable whatever their class.</p>
   <h2>What's on a planet</h2>
   <ul>
-    <li><b>Deposits</b> underground: amethyst blocks give <b>Warp Crystals</b> and raw iron blocks give <b>Hull Alloy</b>.</li>
-    <li><b>Ores</b> specific to each class, for example emerald and raw copper on verdant worlds.</li>
+    <li><b>Deposits</b> underground: crystal deposits give <b>Warp Crystals</b> and Ferrite Deposits give <b>Hull Alloy</b>.</li>
+    <li><b>Ores</b> specific to each class, for example Viridium and Cuprite on verdant worlds.</li>
     <li><b>Caves</b> and winding tunnels, some open to the surface.</li>
     <li><b>Alien sites</b>, about 50 per world, and on some classes a <b>lost city</b>. See <a href="#alien-sites">Alien sites</a>.</li>
     <li><b>Structures</b>: wrecks, pods, relays, ruins, probes, monoliths and craters. Crashed ships hold <b>salvage nodes</b> you can break for parts.</li>
@@ -400,7 +407,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <li><b>Any site counts.</b> Missions and contracts that say “find an alien site” accept any site on that planet, including ones you've already visited.</li>
   </ul>
   <h3>Site loot</h3>
-  <p>Site crates always hold at least one <b>Alien Artifact</b>. They can also hold credits, Warp Crystals, Hull Alloy, Energy Cells, ender pearls, a data disk (about 18%) and occasionally a tool. They have a chance of a <b>Precursor Relic</b>: at least 8% per cache, or 2% × danger on dangerous worlds.</p>
+  <p>Site crates always hold at least one <b>Alien Artifact</b>. They can also hold credits, Warp Crystals, Hull Alloy, Energy Cells, Phase Pearls, a data disk (about 18%) and occasionally a tool. They have a chance of a <b>Precursor Relic</b>: at least 8% per cache, or 2% × danger on dangerous worlds.</p>
   <h2>Lost cities</h2>
   <p>About half of shadow, ash, lunar, crystal, glacial and canyon worlds have an ancient <b>lost city</b>, 250 to 700 blocks from the planet's center. It's sunk into the ground and surrounded by bones and webs. Precursor constructs roam it, and its guardian boss is <b>The Last Overseer</b>. Defeating a lost-city guardian is a Chapter 5 campaign objective.</p>
   <h2>Where relics come from</h2>
@@ -443,22 +450,44 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <li>Only crew can build or use things aboard. Guests can look but not touch.</li>
     <li>The original hull blocks and the outer hull can't be broken. Crew with the <i>build</i> right can add their own blocks inside.</li>
     <li>Explosions, fire, mob griefing and liquids never touch a hull, and ships never expire.</li>
-    <li>Ender pearls and chorus fruit don't work aboard ships.</li>
+    <li>Phase Pearls and chorus fruit don't work aboard ships.</li>
     <li>Players can't hurt each other aboard.</li>
     <li>If you die, you respawn on your ship.</li>
   </ul>
-  <h2>Shipboard crew</h2>
-  <p>Bigger hulls come with NPC crew in Frontier uniforms. They only appear while someone is aboard, can't be hurt and never stand on a console.</p>
-  <ul>
-    <li><b>Officers at their posts:</b> size 3+ hulls get a helm officer, operations officer and engineer. Size 4 adds tactical and a doctor in the Med Bay, size 5 a science officer, and size 6 a transporter chief.</li>
-    <li><b>Crew on the decks:</b> 1 on size 2, 2 on size 3, 3 on size 4, 5 on size 5, 8 on size 6 and 10 on the Destiny.</li>
-    <li><b>Traders:</b> some of the crew (gold names) run a small shop. Right-click them. Their stock follows your hull's specialty: a mining barge's Mining Foreman sells lasers and buys raw ore, a medical cruiser's medic sells med supplies, and so on.</li>
-    <li>Right-click any crew member to talk. The captain or first officer can stand them down with <code>/ship npcs off</code> (and <code>/ship npcs on</code> to bring them back).</li>
-  </ul>
+  <p>Bigger hulls also carry NPC crew. See <a href="#shipboard-crew">Shipboard crew</a>.</p>
   <h2>Renaming</h2>
   <p><code>/ship name &lt;name&gt;</code>. Your ship's name is also your <a href="#factions">faction's</a> name.</p>
   <h2>Cargo pod</h2>
   <p>Hauler hulls (Mule, Pelican, Crane, Titan) can beam a crew-only <b>field cargo pod</b> down beside the away team with <code>/ship pod</code>. It holds 27 slots on size 1–2 hulls, 36 on size 3–4 and 54 on size 5–6. It beams back up when the last crew member leaves the planet.</p>
+</article>
+
+<!-- ============================================================ SHIPBOARD CREW -->
+<article id="shipboard-crew" data-title="Shipboard crew">
+  <h1>Shipboard crew</h1>
+  <p class="lede-from">From Frontier Wiki · NPC officers and crew aboard bigger hulls</p>
+  <p>Bigger hulls come with NPC crew in Frontier uniforms. They only appear while someone is aboard, can't be hurt and never stand on a console.</p>
+  <ul>
+    <li><b>Officers at their posts:</b> size 3+ hulls get a helm officer, operations officer and engineer. Size 4 adds tactical and a doctor in the Med Bay, size 5 a science officer, and size 6 a transporter chief.</li>
+    <li><b>Crew on the decks:</b> 1 on size 2, 2 on size 3, 3 on size 4, 5 on size 5, 8 on size 6 and 10 on the Destiny.</li>
+    <li>Right-click any crew member to talk. The captain or first officer can stand them down with <code>/ship npcs off</code> (and <code>/ship npcs on</code> to bring them back).</li>
+  </ul>
+  <h2>Traders</h2>
+  <p>Some of the walking crew run a small shop. They have gold names; right-click one to open it. Their stock follows your hull's specialty:</p>
+  <div class="tw"><table>
+    <tr><th>Specialty</th><th>Trader</th><th>Sells</th><th>Buys from you</th></tr>
+    <tr><td>Courier</td><td>Supply Officer</td><td>Energy Cells, air tanks, grav thrusters, food</td><td>–</td></tr>
+    <tr><td>Explorer</td><td>Expedition Quartermaster</td><td>Warp Crystals, air tanks, med injectors, cells</td><td>–</td></tr>
+    <tr><td>Science</td><td>Science Officer</td><td>Tricorders, cells, med injectors</td><td>Alien Artifacts</td></tr>
+    <tr><td>Combat</td><td>Armory Officer</td><td>Phasers, plasma swords, cells, med injectors</td><td>–</td></tr>
+    <tr><td>Stealth</td><td>Covert Supply</td><td>Cells, grav thrusters, med injectors, Phase Pearls</td><td>–</td></tr>
+    <tr><td>Hauler</td><td>Cargo Master</td><td>Hull Alloy, Warp Crystals, storage crates</td><td>Ferrite and Cuprite Deposits</td></tr>
+    <tr><td>Trader</td><td>Ship's Factor</td><td>Cells, crystals, air tanks</td><td>Artifacts, relics, Rose Diamonds, Viridium Crystals, Aurum Ingots</td></tr>
+    <tr><td>Mining</td><td>Mining Foreman</td><td>Mining Lasers, Geo-Picks, cells, lights</td><td>Raw ore, Resonance Shards</td></tr>
+    <tr><td>Medical</td><td>Ship's Medic</td><td>Med injectors, med-pack rations, air tanks</td><td>–</td></tr>
+    <tr><td>Diplomat</td><td>Purser</td><td>Comm badges, air tanks, food, cells</td><td>–</td></tr>
+    <tr><td>Carrier</td><td>Deck Chief</td><td>Cells, phasers, air tanks, food</td><td>–</td></tr>
+  </table></div>
+  <p>Traders pay a little under the Station Exchange, so the station is still the best place to sell.</p>
 </article>
 
 <!-- ============================================================ HULLS -->
@@ -600,7 +629,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p>An unbreakable pickaxe that needs no Energy Cells. It's slower than the laser but free to run. It's in the Academy kit, and the Replicator makes one for 30 matter.</p>
   <h2>Tricorder</h2>
   <ul>
-    <li><b>Right-click:</b> mineral scan. Ores within 20 blocks glow in their own colors, with an arrow to the nearest. It uses 8 charge. Ore names match the resource pack, so Cuperite shows as Cuperite.</li>
+    <li><b>Right-click:</b> mineral scan. Ores within 20 blocks glow in their own colors, with an arrow to the nearest. It uses 8 charge. Ore names match the resource pack, so Cuprite shows as Cuprite, not as a vanilla ore.</li>
     <li><b>Sneak + right-click near creatures:</b> a life-sign scan, for 12 charge. Away missions use it.</li>
     <li>It also reports the nearest alien site within 400 blocks.</li>
     <li>Scans don't find ore inside the cities.</li>
@@ -623,7 +652,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <tr><td>Plasma Sword</td><td class="n">360</td><td class="n">320</td></tr>
     <tr><td>Mining Laser</td><td class="n">380</td><td class="n">340</td></tr>
   </table></div>
-  <p>The Phaser Rifle is made from materials: 10 alloy, 4 cells, 4 crystals, 2 diamonds and 450 credits.</p>
+  <p>The Phaser Rifle is made from materials: 10 alloy, 4 cells, 4 crystals, 2 Rose Diamonds and 450 credits.</p>
 </article>
 
 <!-- ============================================================ SUITS -->
@@ -636,13 +665,13 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <h2>Suit tiers</h2>
   <p>A full suit makes your air last longer and gives set bonuses. Suits are made at the Replicator from materials.</p>
   <div class="tw"><table>
-    <tr><th>Suit</th><th>Base</th><th>Air use</th><th>Set bonus</th><th class="n">Pouch</th><th>Notes</th></tr>
-    <tr><td>EVA Suit</td><td>Chainmail</td><td>60%</td><td>Night vision</td><td class="n">9</td><td>Given at graduation</td></tr>
-    <tr><td>Pathfinder Suit</td><td>Iron</td><td>50%</td><td>Night vision, speed</td><td class="n">18</td><td>Hazard immune</td></tr>
-    <tr><td>Assault Armor</td><td>Diamond</td><td>40%</td><td>Resistance, strength</td><td class="n">27</td><td>Needs artifacts</td></tr>
-    <tr><td>Vanguard Exosuit</td><td>Netherite</td><td>25%</td><td>Resistance, strength, night vision, speed</td><td class="n">36</td><td>Hazard immune</td></tr>
-    <tr><td>Precursor Exosuit</td><td>Netherite</td><td>None</td><td>Resistance II, regeneration, speed, night vision, strength</td><td class="n">54</td><td>Unbreakable, self-contained air, needs a relic per piece</td></tr>
-    <tr><td>Marauder Rig</td><td>Netherite</td><td>–</td><td>Strength II, speed II, resistance, night vision, fire resistance</td><td class="n">–</td><td>Outlaw-only, sold at the Outlaw Armory</td></tr>
+    <tr><th>Suit</th><th>Protection</th><th>Air use</th><th>Set bonus</th><th class="n">Pouch</th><th>Notes</th></tr>
+    <tr><td>EVA Suit</td><td>Light</td><td>60%</td><td>Night vision</td><td class="n">9</td><td>Given at graduation</td></tr>
+    <tr><td>Pathfinder Suit</td><td>Medium</td><td>50%</td><td>Night vision, speed</td><td class="n">18</td><td>Hazard immune</td></tr>
+    <tr><td>Assault Armor</td><td>Heavy</td><td>40%</td><td>Resistance, strength</td><td class="n">27</td><td>Needs artifacts</td></tr>
+    <tr><td>Vanguard Exosuit</td><td>Very heavy</td><td>25%</td><td>Resistance, strength, night vision, speed</td><td class="n">36</td><td>Hazard immune</td></tr>
+    <tr><td>Precursor Exosuit</td><td>Very heavy</td><td>None</td><td>Resistance II, regeneration, speed, night vision, strength</td><td class="n">54</td><td>Unbreakable, self-contained air, needs a relic per piece</td></tr>
+    <tr><td>Marauder Rig</td><td>Very heavy</td><td>–</td><td>Strength II, speed II, resistance, night vision, fire resistance</td><td class="n">–</td><td>Outlaw-only, sold at the Outlaw Armory</td></tr>
   </table></div>
   <p>Each armor piece fits its own slot. Hazard-immune suits ignore hostile planet effects. Mod disks such as Life Support, Hazard Shielding, Thermal Regulator and Grav Stabilizers fit armor; see <a href="#disks">Data disks</a>.</p>
 </article>
@@ -656,8 +685,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <h2>Resources</h2>
   <div class="tw"><table>
     <tr><th>Item</th><th>What it's for</th><th>How to get it</th></tr>
-    <tr><td>Warp Crystal</td><td>Warp fuel (10 each), refits, recipes</td><td>Amethyst deposits on planets, loot, contracts</td></tr>
-    <tr><td>Hull Alloy</td><td>Refits, gear, armor</td><td>Raw iron block deposits, asteroid fields, the Replicator (140 matter, or 4 iron + 3 copper ingots + 1 crystal)</td></tr>
+    <tr><td>Warp Crystal</td><td>Warp fuel (10 each), refits, recipes</td><td>Crystal deposits on planets, loot, contracts</td></tr>
+    <tr><td>Hull Alloy</td><td>Refits, gear, armor</td><td>Ferrite Deposits, asteroid fields, the Replicator (140 matter, or 4 Ferrite + 3 Cuprite Ingots + 1 crystal)</td></tr>
     <tr><td>Energy Cell</td><td>Powers tools and weapons</td><td>See <a href="#energy-cells">Energy cells</a></td></tr>
     <tr><td>Alien Artifact</td><td>Research data, armor, upgrades, bounties</td><td>Alien-site crates, away missions</td></tr>
     <tr><td>Precursor Relic</td><td>Precursor armor, Ricochet disk, campaign</td><td>See <a href="#alien-sites">Alien sites</a></td></tr>
@@ -688,19 +717,19 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <div class="tw"><table>
     <tr><th>Disk</th><th class="n">Max</th><th>Fits</th><th>Effect</th><th>Research cost</th></tr>
     <tr><td>Ion Discharge</td><td class="n">3</td><td>Melee</td><td>Chance to arc lightning into nearby hostiles</td><td>220 data, 2 alloy, 2 crystals</td></tr>
-    <tr><td>Bio-Siphon</td><td class="n">3</td><td>Melee</td><td>Heals you for part of the damage you deal</td><td>260 data, 2 alloy, 1 crystal, 1 ghast tear</td></tr>
+    <tr><td>Bio-Siphon</td><td class="n">3</td><td>Melee</td><td>Heals you for part of the damage you deal</td><td>260 data, 2 alloy, 1 crystal, 1 Ectoplasm Tear</td></tr>
     <tr><td>Stasis Field</td><td class="n">3</td><td>Melee, phaser</td><td>Chance to slow your target</td><td>240 data, 2 alloy, 2 crystals</td></tr>
     <tr><td>Xeno Bane</td><td class="n">5</td><td>Melee</td><td>Extra damage against hostile creatures</td><td>200 data, 2 alloy, 1 crystal</td></tr>
     <tr><td>Overcharge</td><td class="n">3</td><td>Phaser</td><td>+12% beam damage per level, uses more charge</td><td>280 data, 3 alloy, 2 cells</td></tr>
     <tr><td>Ricochet Matrix</td><td class="n">2</td><td>Phaser</td><td>Beams can jump to a second target</td><td>420 data, 4 alloy, 3 crystals, 1 relic</td></tr>
     <tr><td>Matter Reclaimer</td><td class="n">1</td><td>Mining tools</td><td>Ores and sand come out refined</td><td>450 data, 6 alloy, 3 crystals</td></tr>
-    <tr><td>Tractor Beam</td><td class="n">1</td><td>Mining tools, melee</td><td>Drops go straight into your inventory</td><td>400 data, 4 alloy, 2 crystals, 2 ender pearls</td></tr>
+    <tr><td>Tractor Beam</td><td class="n">1</td><td>Mining tools, melee</td><td>Drops go straight into your inventory</td><td>400 data, 4 alloy, 2 crystals, 2 Phase Pearls</td></tr>
     <tr><td>Excavation Field</td><td class="n">1</td><td>Mining Laser, Geo-Pick</td><td>Mines 3×3 (sneak for one block); the laser's wide beam becomes 5×5</td><td>500 data, 6 alloy, 4 crystals, 2 cells</td></tr>
     <tr><td>Geo-Pulse</td><td class="n">3</td><td>Mining Laser, Geo-Pick</td><td>Sometimes reveals ores around you</td><td>240 data, 2 alloy, 2 crystals</td></tr>
     <tr><td>Life Support</td><td class="n">3</td><td>Helmet</td><td>O₂ tanks last longer; breathe underwater</td><td>220 data, 2 alloy, 1 cell</td></tr>
     <tr><td>Hazard Shielding</td><td class="n">2</td><td>Chestplate</td><td>Resists hostile planet effects (immune at II)</td><td>220 data, 3 alloy, 1 crystal</td></tr>
     <tr><td>Thermal Regulator</td><td class="n">4</td><td>Leggings</td><td>−15% heat and cold damage per level</td><td>200 data, 2 alloy, 1 crystal</td></tr>
-    <tr><td>Grav Stabilizers</td><td class="n">4</td><td>Boots</td><td>−20% fall damage per level</td><td>200 data, 2 alloy, 4 feathers</td></tr>
+    <tr><td>Grav Stabilizers</td><td class="n">4</td><td>Boots</td><td>−20% fall damage per level</td><td>200 data, 2 alloy, 4 Plumes</td></tr>
     <tr><td>Self-Repair Matrix</td><td class="n">3</td><td>Anything</td><td>Slowly repairs itself</td><td>300 data, 3 alloy, 2 crystals, 1 cell</td></tr>
   </table></div>
   <p>The research cost shown is for level I. You also find disks in alien-site crates (about 18%) and as away mission rewards (12% + 2% per danger).</p>
@@ -748,17 +777,17 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <h2>From materials (selected)</h2>
   <div class="tw"><table>
     <tr><th>Recipe</th><th>Cost</th></tr>
-    <tr><td>Energy Cells ×4</td><td>1 Warp Crystal, 2 redstone</td></tr>
-    <tr><td>Energy Cells ×2 (carbon)</td><td>3 coal, 2 redstone</td></tr>
-    <tr><td>Energy Cells ×2 (field charge)</td><td>2 coal, 2 raw copper</td></tr>
-    <tr><td>Hull Alloy</td><td>4 iron ingots, 3 copper ingots, 1 crystal</td></tr>
-    <tr><td>Hull Alloy ×2 (gold-tempered)</td><td>6 iron ingots, 2 gold ingots, 1 crystal</td></tr>
-    <tr><td>O₂ Air Tank</td><td>3 glass, 2 iron ingots, 1 crystal (or 2 alloy, 1 cell, 8 kelp)</td></tr>
+    <tr><td>Energy Cells ×4</td><td>1 Warp Crystal, 2 Energite Dust</td></tr>
+    <tr><td>Energy Cells ×2 (carbon)</td><td>3 Carbon Chunks, 2 Energite Dust</td></tr>
+    <tr><td>Energy Cells ×2 (field charge)</td><td>2 Carbon Chunks, 2 Raw Cuprite</td></tr>
+    <tr><td>Hull Alloy</td><td>4 Ferrite Ingots, 3 Cuprite Ingots, 1 crystal</td></tr>
+    <tr><td>Hull Alloy ×2 (gold-tempered)</td><td>6 Ferrite Ingots, 2 Aurum Ingots, 1 crystal</td></tr>
+    <tr><td>O₂ Air Tank</td><td>3 glass, 2 Ferrite Ingots, 1 crystal (or 2 alloy, 1 cell, 8 Kelp Fronds)</td></tr>
     <tr><td>EVA Suit (4 pieces)</td><td>11 alloy, 4 cells, 14 white wool, 216 credits in total</td></tr>
-    <tr><td>Phaser Rifle</td><td>10 alloy, 4 cells, 4 crystals, 2 diamonds, 450 credits</td></tr>
-    <tr><td>Fluid Canister (bucket)</td><td>3 iron ingots</td></tr>
-    <tr><td>Shears / Fishing rod / Plasma Igniter</td><td>Iron ingots plus string or flint</td></tr>
-    <tr><td>Sticks / Bowls / Paper</td><td>Planks or sugar cane</td></tr>
+    <tr><td>Phaser Rifle</td><td>10 alloy, 4 cells, 4 crystals, 2 Rose Diamonds, 450 credits</td></tr>
+    <tr><td>Fluid Canister</td><td>3 Ferrite Ingots</td></tr>
+    <tr><td>Shears / Fishing rod / Plasma Igniter</td><td>Ferrite Ingots plus Silk Fiber or Obsidian Flake</td></tr>
+    <tr><td>Sticks / Bowls / Data Sheets</td><td>Planks or Sugar Reed</td></tr>
   </table></div>
 </article>
 
@@ -769,27 +798,26 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p>Each item has a matter value. Recycling gives you <b>half</b> of it, and items the Replicator makes can't be recycled for a profit. Anything not listed is worth 0.2 matter each, so 64 of it gives 6.4 matter after recycling.</p>
   <div class="tw"><table>
     <tr><th>Item</th><th class="n">Matter value</th><th class="n">You get (×0.5)</th></tr>
-    <tr><td>Dirt, grass, netherrack</td><td class="n">0.04</td><td class="n">0.02</td></tr>
-    <tr><td>Stone, cobblestone, deepslate, sand, gravel, tuff, basalt, andesite, diorite, granite, calcite, blackstone</td><td class="n">0.06</td><td class="n">0.03</td></tr>
+    <tr><td>Dirt, grass</td><td class="n">0.04</td><td class="n">0.02</td></tr>
+    <tr><td>Stone, cobblestone, deepslate, sand, gravel, tuff, basalt, blackstone, andesite, calcite</td><td class="n">0.06</td><td class="n">0.03</td></tr>
     <tr><td>Planks</td><td class="n">0.15</td><td class="n">0.075</td></tr>
-    <tr><td>Rotten flesh</td><td class="n">0.15</td><td class="n">0.075</td></tr>
-    <tr><td>Bone, string</td><td class="n">0.3</td><td class="n">0.15</td></tr>
+    <tr><td>Necrotic Tissue</td><td class="n">0.15</td><td class="n">0.075</td></tr>
+    <tr><td>Calcified Bone, Silk Fiber</td><td class="n">0.3</td><td class="n">0.15</td></tr>
     <tr><td>Logs (any)</td><td class="n">0.6</td><td class="n">0.3</td></tr>
-    <tr><td>Charcoal, redstone, lapis</td><td class="n">0.8</td><td class="n">0.4</td></tr>
-    <tr><td>Coal</td><td class="n">1</td><td class="n">0.5</td></tr>
-    <tr><td>Raw copper, quartz, amethyst shard</td><td class="n">1.5</td><td class="n">0.75</td></tr>
-    <tr><td>Copper ingot</td><td class="n">2.5</td><td class="n">1.25</td></tr>
-    <tr><td>Raw iron</td><td class="n">3</td><td class="n">1.5</td></tr>
-    <tr><td>Blaze rod</td><td class="n">4</td><td class="n">2</td></tr>
-    <tr><td>Raw gold</td><td class="n">4.5</td><td class="n">2.25</td></tr>
-    <tr><td>Iron ingot, ender pearl</td><td class="n">5</td><td class="n">2.5</td></tr>
-    <tr><td>Gold ingot</td><td class="n">7</td><td class="n">3.5</td></tr>
-    <tr><td>Emerald</td><td class="n">20</td><td class="n">10</td></tr>
-    <tr><td>Diamond</td><td class="n">40</td><td class="n">20</td></tr>
-    <tr><td>Netherite scrap</td><td class="n">80</td><td class="n">40</td></tr>
+    <tr><td>Pyro-carbon, Energite Dust, Azurite</td><td class="n">0.8</td><td class="n">0.4</td></tr>
+    <tr><td>Carbon Chunk</td><td class="n">1</td><td class="n">0.5</td></tr>
+    <tr><td>Raw Cuprite, Silica Crystal, Resonance Shard</td><td class="n">1.5</td><td class="n">0.75</td></tr>
+    <tr><td>Cuprite Ingot</td><td class="n">2.5</td><td class="n">1.25</td></tr>
+    <tr><td>Raw Ferrite</td><td class="n">3</td><td class="n">1.5</td></tr>
+    <tr><td>Raw Aurum</td><td class="n">4.5</td><td class="n">2.25</td></tr>
+    <tr><td>Ferrite Ingot, Phase Pearl</td><td class="n">5</td><td class="n">2.5</td></tr>
+    <tr><td>Aurum Ingot</td><td class="n">7</td><td class="n">3.5</td></tr>
+    <tr><td>Viridium Crystal</td><td class="n">20</td><td class="n">10</td></tr>
+    <tr><td>Rose Diamond</td><td class="n">40</td><td class="n">20</td></tr>
+    <tr><td>Neutronium Scrap</td><td class="n">80</td><td class="n">40</td></tr>
     <tr><td>Anything else</td><td class="n">0.2</td><td class="n">0.1</td></tr>
   </table></div>
-  <p>Refining raw ore into ingots before recycling gives more matter. Raw iron gives 1.5 and an iron ingot 2.5, and the Refinery is free.</p>
+  <p>Refining raw ore into ingots before recycling gives more matter: Raw Ferrite gives 1.5, a Ferrite Ingot 2.5, and the Refinery is free.</p>
 </article>
 
 <!-- ============================================================ ENERGY CELLS -->
@@ -799,9 +827,9 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p>Energy Cells power phasers, the plasma sword, the Mining Laser, the tricorder, med injectors and grav thrusters. Each cell is 100 charge. New captains start with a handful, so you'll need to make more.</p>
   <h2>Ways to get cells</h2>
   <ol>
-    <li><b>Field charge (no ship needed):</b> 2 coal + 2 raw copper makes 2 cells at any Replicator terminal. Both are easy to mine in the Frontier Wilds.</li>
-    <li><b>Carbon:</b> 3 coal + 2 redstone makes 2 cells.</li>
-    <li><b>Crystal:</b> 1 Warp Crystal + 2 redstone makes 4 cells, the best rate.</li>
+    <li><b>Field charge (no ship needed):</b> 2 Carbon Chunks + 2 Raw Cuprite makes 2 cells at any Replicator terminal. Both are easy to mine in the Frontier Wilds.</li>
+    <li><b>Carbon:</b> 3 Carbon Chunks + 2 Energite Dust makes 2 cells.</li>
+    <li><b>Crystal:</b> 1 Warp Crystal + 2 Energite Dust makes 4 cells, the best rate.</li>
     <li><b>From matter:</b> 20 matter makes 2 cells.</li>
     <li><b>Buy:</b> 10 credits each from the Quartermaster.</li>
     <li><b>Rewards:</b> orientation gives 6 cells, and site crates and loot often hold some.</li>
@@ -819,21 +847,21 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p>You can only sell at the <b>Station Exchange</b> on <a href="#nexus">Nexus Station</a>. Some prices it pays per item:</p>
   <div class="tw"><table>
     <tr><th>Item</th><th class="n">Credits</th><th>Item</th><th class="n">Credits</th></tr>
-    <tr><td>Precursor Relic</td><td class="n">1,800</td><td>Nether star</td><td class="n">900</td></tr>
-    <tr><td>Netherite ingot</td><td class="n">420</td><td>Heart of the sea</td><td class="n">250</td></tr>
-    <tr><td>Alien Artifact</td><td class="n">140</td><td>Netherite scrap</td><td class="n">90</td></tr>
-    <tr><td>Ancient debris</td><td class="n">80</td><td>Raw gold block</td><td class="n">55</td></tr>
-    <tr><td>Hull Alloy</td><td class="n">30</td><td>Diamond</td><td class="n">28</td></tr>
-    <tr><td>Raw iron block</td><td class="n">28</td><td>Echo shard</td><td class="n">22</td></tr>
-    <tr><td>Warp Crystal</td><td class="n">15</td><td>Emerald</td><td class="n">14</td></tr>
-    <tr><td>Gold ingot</td><td class="n">8</td><td>Raw gold</td><td class="n">6</td></tr>
-    <tr><td>Iron ingot</td><td class="n">4</td><td>Raw iron</td><td class="n">3</td></tr>
+    <tr><td>Precursor Relic</td><td class="n">1,800</td><td>Stellar Core</td><td class="n">900</td></tr>
+    <tr><td>Neutronium Ingot</td><td class="n">420</td><td>Abyssal Core</td><td class="n">250</td></tr>
+    <tr><td>Alien Artifact</td><td class="n">140</td><td>Neutronium Scrap</td><td class="n">90</td></tr>
+    <tr><td>Neutronium Deposit</td><td class="n">80</td><td>Aurum Deposit</td><td class="n">55</td></tr>
+    <tr><td>Hull Alloy</td><td class="n">30</td><td>Rose Diamond</td><td class="n">28</td></tr>
+    <tr><td>Ferrite Deposit</td><td class="n">28</td><td>Echo Shard</td><td class="n">22</td></tr>
+    <tr><td>Warp Crystal</td><td class="n">15</td><td>Viridium Crystal</td><td class="n">14</td></tr>
+    <tr><td>Aurum Ingot</td><td class="n">8</td><td>Raw Aurum</td><td class="n">6</td></tr>
+    <tr><td>Ferrite Ingot</td><td class="n">4</td><td>Raw Ferrite</td><td class="n">3</td></tr>
   </table></div>
   <p>Exotic samples sell for the value printed on them. Trader hulls get +15% and the Free Trade Syndicate alliance another +15%.</p>
   <h2>Buying</h2>
   <p>The Exchange also sells supplies, for example Warp Crystals at 40, Hull Alloy at 75 and Energy Cells at 8. On Earth, the <b>Quartermaster</b> (<code>/qm</code>) sells starter gear.</p>
   <h2>Trading with players</h2>
-  <p>Use <code>/trade &lt;name&gt;</code> or sneak + right-click a player. Click your items to offer them; the gold nugget adds credits. When both players click <b>Confirm</b>, the swap happens after a short countdown.</p>
+  <p>Use <code>/trade &lt;name&gt;</code> or sneak + right-click a player. Click your items to offer them; the Aurum Flake adds credits. When both players click <b>Confirm</b>, the swap happens after a short countdown.</p>
 </article>
 
 <!-- ============================================================ CONTRACTS -->
@@ -1007,13 +1035,153 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p>PvP is only on danger-5 worlds and in the Outlands. Everywhere else (ships, stations, outposts, the Academy, other planets) it's off. Crewmates can never hurt each other.</p>
   <h2>Rules</h2>
   <ul>
-    <li>If a player kills you in a PvP zone, <b>everything you carry drops</b> and the killer takes 20% of your wallet, up to 50,000.</li>
+    <li>Dying in a PvP zone drops <b>everything</b>: armor, hotbar, inventory and suit pouches. If a player killed you, they also take 5% of your wallet, up to 50,000.</li>
+    <li>Everywhere else you keep your armor, hotbar, off hand and suit pouches when you die; only the main inventory drops.</li>
     <li>A PvP hit tags both players for 15 seconds. While tagged you can't beam out or use escape commands such as <code>/spawn</code>, <code>/home</code>, <code>/tpa</code> or <code>/warp</code>.</li>
     <li>Logging out while tagged drops your gear to whoever hit you last.</li>
     <li>PvP worlds pay 1.5× on contracts and exotic samples, and keep landing sites at least 250 blocks apart.</li>
   </ul>
   <h2>Bounties</h2>
   <p>Use <code>/bounty place &lt;player&gt; &lt;amount&gt;</code> (minimum 100, plus a 5% posting fee) and <code>/bounty</code> to see the board. <code>/bounty cancel &lt;player&gt;</code> withdraws yours with a 75% refund. Whoever kills the target in a PvP zone collects the bounty.</p>
+</article>
+
+<!-- ============================================================ DERELICTS -->
+<article id="derelicts" data-title="Derelicts and distress calls">
+  <h1>Derelicts and distress calls</h1>
+  <p class="lede-from">From Frontier Wiki · boarding dead ships · Helm → Sensors</p>
+  <div class="infobox"><div class="ih">Derelicts</div><dl>
+    <dt>Found</dt><dd>On arrival in a system (15% + 2% per danger)</dd>
+    <dt>Distress</dt><dd>Mid-warp to a dangerous system (12%)</dd>
+    <dt>Lasts</dt><dd>45 minutes on sensors</dd>
+    <dt>Bring</dt><dd>O₂ tank, Energy Cells, a weapon</dd>
+  </dl></div>
+  <p>Now and then your sensors pick up a dead ship drifting in the system you just warped into. When the <b>Sensors</b> button on the Helm shimmers, there's a contact. Open it and click the derelict to beam aboard.</p>
+  <h2>Aboard a derelict</h2>
+  <ul>
+    <li>It's a real hull design, breached and stripped. The lights are out and <b>there's no air</b>.</li>
+    <li>Things moved in: mites, leeches, stalkers and scavenger drones.</li>
+    <li><b>Supply caches</b> (barrels) hold cells, alloy, crystals, credits, air tanks and sometimes artifacts or data disks.</li>
+    <li><b>Salvage nodes</b> break into ship parts.</li>
+    <li>The <b>emergency power junctions</b> look like respawn anchors and sit at the old consoles and around the decks. Right-click each one with an <b>Energy Cell</b> in your inventory.</li>
+  </ul>
+  <h2>Restoring power</h2>
+  <p>When every junction is online, the lights come back and <b>life support is restored</b>, so tanks refill and you can breathe. The ship's computer pays everyone aboard credits and research data, and the captain's safe sometimes holds an Alien Artifact.</p>
+  <h2>Distress calls</h2>
+  <p>A distress call comes in while you're at warp and shows up on Sensors when you arrive. These ships have <b>survivors</b> aboard. Find them and right-click them to beam them to safety. Each one pays credits, and getting everyone out pays a bonus. About one call in four is a <b>Reaver trap</b>: raiders board a few seconds after you do.</p>
+  <h2>Getting back</h2>
+  <p>Right-click your <b>Comm Badge</b> to beam back to your ship, as long as it hasn't warped away. The emergency recall (sneak + right-click) always works. You can't break the wreck itself, only cobwebs and salvage nodes.</p>
+</article>
+
+<!-- ============================================================ ANOMALIES -->
+<article id="anomalies" data-title="Anomalies">
+  <h1>Anomalies</h1>
+  <p class="lede-from">From Frontier Wiki · strange space on the star map</p>
+  <p>About one system in ten has a space anomaly. The Helm shows it in the system's tooltip with a purple <b>◎</b>. Warping into the system feels the effect, and you can scan the anomaly from <b>Helm → Sensors</b> once you're there.</p>
+  <div class="tw"><table>
+    <tr><th>Anomaly</th><th>Warping in</th><th class="n">Scan data</th></tr>
+    <tr><td>Nebula</td><td>Sensor-blind: no raider ambushes, +25% fuel</td><td class="n">60</td></tr>
+    <tr><td>Ion storm</td><td>+40% travel time, more raiders</td><td class="n">80</td></tr>
+    <tr><td>Pulsar</td><td>Gravity slingshot: −25% travel time</td><td class="n">70</td></tr>
+    <tr><td>Black hole</td><td>+50% fuel, +20% travel time</td><td class="n">150</td></tr>
+  </table></div>
+  <p>A scan gives <b>research data to everyone aboard</b>, or 50% more on a science hull, and pays credits into the ship fund. A black hole sometimes gives up an Alien Artifact too. Each ship can log each anomaly once every 20 hours.</p>
+</article>
+
+<!-- ============================================================ COSMETICS -->
+<article id="cosmetics" data-title="Ship cosmetics">
+  <h1>Ship cosmetics</h1>
+  <p class="lede-from">From Frontier Wiki · make the ship yours · <code>/ship cosmetics</code></p>
+  <p>The captain or first officer can refit the ship's look with <code>/ship cosmetics</code>. Each option is <b>bought once per ship</b> from the ship fund, and switching between options you own is free. Paint follows refits: after a hull upgrade or rebuild it's reapplied automatically.</p>
+  <h2>Hull paint</h2>
+  <p>Repaints the outer hull in two colors. Options: Ivory, Fleet Navy, Crimson, Obsidian, Gilded, Emerald and Royal, at 2,000–3,500 credits each.</p>
+  <h2>Accent trim</h2>
+  <p>Recolors the hull's accent stripes: red, gold, cyan, purple, orange, black or white, at 1,000–1,200 credits each.</p>
+  <h2>Interior decks</h2>
+  <p>Replaces the deck flooring inside: Dark deck, Officer's wood, Marble, Engineering copper, Checkerboard or Starlight, at 2,000–3,500 credits each. Blocks your crew built are never touched.</p>
+  <h2>Hull name plate</h2>
+  <p>Your ship's name in big letters on both sides of the hull, for 800 credits. Click it again to hide or show it.</p>
+</article>
+
+<!-- ============================================================ COLONIES -->
+<article id="colonies" data-title="Colonies">
+  <h1>Colonies</h1>
+  <p class="lede-from">From Frontier Wiki · frontier settlements · <code>/colony</code></p>
+  <div class="infobox"><div class="ih">Colony lease</div><dl>
+    <dt>Where</dt><dd>One settlement per sector, danger 1–4 worlds</dd>
+    <dt>Lease</dt><dd>72 hours</dd>
+    <dt>Price</dt><dd>8,000 + 2,000 per danger (+1,500 per level)</dd>
+    <dt>Takeover</dt><dd>Bid 15% more than the holder</dd>
+    <dt>Per crew</dt><dd>1 lease (2 on size 5+ hulls)</dd>
+  </dl></div>
+  <p>Every sector has a <b>frontier settlement</b> on one of its worlds: a plaza with habitat domes, hydroponics, a landing pad, colonists and a <b>Colony Core</b> in the middle. The settlers run it themselves until a crew <b>leases</b> it. <code>/colony</code> lists every settlement with its world, location, who holds it and what it costs.</p>
+  <h2>Leasing</h2>
+  <ul>
+    <li>Click a settlement in <code>/colony</code>, or right-click its Core or Administrator, then <b>Lease this colony</b>. The captain or first officer pays from the ship fund.</li>
+    <li>A lease lasts <b>72 hours</b>. Renew it from the colony menu before it runs out, for the same price. You'll get a warning 6 hours before the end.</li>
+    <li><b>Takeovers:</b> any other crew can take the colony over at any time by bidding at least 15% more than the holder paid. The outbid crew gets half of the unused part of their bid back, and anything left in the stores goes to the new holder, so collect often.</li>
+    <li>When a lease ends, the settlement goes back to its colonists and its stores are cleared.</li>
+  </ul>
+  <h2>Running a leased colony</h2>
+  <ul>
+    <li><b>Supply depot:</b> drop in food (meals count double) and <b>Energy Cells</b>. Each cycle (60 minutes) the colonists eat and the colony uses one cell per level.</li>
+    <li>While supplied, each cycle it <b>produces the planet's resources</b> into its stores, sometimes with Warp Crystals, Hull Alloy or an artifact, and pays <b>tax into the ship fund</b>. If it runs dry, production stops and colonists leave.</li>
+    <li><b>Expand</b> it up to level 5 and install <b>defense batteries</b> with credits and Hull Alloy. Upgrades stay with the colony when it changes hands.</li>
+    <li><code>/colony beam</code> sends you down when your ship is orbiting its world.</li>
+  </ul>
+  <h2>Raids</h2>
+  <p>While a colony is leased, Reavers sometimes attack it (12% per cycle, plus 3% per danger). The holding crew gets an alert and has <b>10 minutes</b> to beam down. Wiping out the raiders pays a bounty to the ship fund. If nobody comes, the defense batteries decide, and a lost raid costs stores, supplies and colonists.</p>
+  <h2>The colony market</h2>
+  <p>Anyone can trade at a settlement's market. The colonists buy food and Energy Cells and sell bread, rations, raw meat and crops.</p>
+</article>
+
+<!-- ============================================================ VAULTS -->
+<article id="vaults" data-title="Precursor vaults">
+  <h1>Precursor vaults</h1>
+  <p class="lede-from">From Frontier Wiki · dungeons beneath the alien sites</p>
+  <p>Some alien sites have a vault buried beneath them: about 30% of sites, more for temples and ruins, and most buried-vault sites. When you walk up to one, your tricorder says so, and a <b>shaft</b> ringed with crying obsidian and light rods appears beside the site. Climb down the ladder.</p>
+  <h2>The rooms</h2>
+  <ol>
+    <li><b>Antechamber</b>, at the foot of the shaft.</li>
+    <li><b>Glyph lock.</b> Four levers sit under four colored blocks. The mural on the far wall shows the colors in the order to pull them. Get it wrong and you get a shock and the levers reset. Get it right and the bars open.</li>
+    <li><b>Charged floor.</b> Only the carved tiles (chiseled tuff) are safe, along one winding lane. Step off it and you get a shock and are thrown back to the start.</li>
+    <li><b>Guardian hall.</b> Precursor sentinels, drones and turrets wake and the hall seals behind you. The way forward opens when they're all down.</li>
+    <li><b>Relic chamber.</b> Open the precursor cache on its pedestal.</li>
+  </ol>
+  <h2>The reward</h2>
+  <p>The cache gives <b>every player one Precursor Relic per vault</b>, plus Alien Artifacts, credits and often a data disk. Then a beam lifts you back to the surface. Vaults are rebuilt, and can be looted again, when the planet regenerates. The vault walls can't be broken.</p>
+</article>
+
+<!-- ============================================================ JOURNAL -->
+<article id="journal" data-title="Captain's Log and titles">
+  <h1>Captain's Log and titles</h1>
+  <p class="lede-from">From Frontier Wiki · <code>/journal</code> · <code>/titles</code></p>
+  <p><code>/journal</code> opens your <b>Captain's Log</b>. It tracks worlds explored, warp jumps, alien sites, relics, missions, contracts, hostiles defeated, derelicts boarded and restored, survivors rescued, anomalies scanned, vaults cleared, colonies and raids, credits from sales, hull classes commanded, and Blackmoor and siege battles.</p>
+  <h2>Achievements</h2>
+  <div class="tw"><table>
+    <tr><th>Achievement</th><th>Goal</th><th>Title</th></tr>
+    <tr><td>First Footsteps</td><td>Beam down to 10 worlds</td><td>Wanderer</td></tr>
+    <tr><td>Star Trail</td><td>Beam down to 40 worlds</td><td>Pathfinder</td></tr>
+    <tr><td>Long Haul</td><td>250 warp jumps</td><td>Warp Veteran</td></tr>
+    <tr><td>Digging Deep</td><td>Discover 25 alien sites</td><td>Archaeologist</td></tr>
+    <tr><td>Relic Hunter</td><td>Find 5 Precursor Relics</td><td>Relic Hunter</td></tr>
+    <tr><td>Vault Breaker</td><td>Clear 3 precursor vaults</td><td>Vault Breaker</td></tr>
+    <tr><td>Wreck Diver</td><td>Board 5 derelicts</td><td>Wreck Diver</td></tr>
+    <tr><td>Spark of Life</td><td>Restore power to 3 derelicts</td><td>Restorer</td></tr>
+    <tr><td>Lifesaver</td><td>Rescue 10 survivors</td><td>Lifesaver</td></tr>
+    <tr><td>Star Charter</td><td>Scan 5 anomalies</td><td>Star Charter</td></tr>
+    <tr><td>New Horizons</td><td>Lease a frontier colony</td><td>Colony Governor</td></tr>
+    <tr><td>Hold the Line</td><td>Fight off 5 colony raids</td><td>Colony Defender</td></tr>
+    <tr><td>Hunter</td><td>Defeat 100 hostiles</td><td>Hunter</td></tr>
+    <tr><td>Exterminator</td><td>Defeat 1,000 hostiles</td><td>Exterminator</td></tr>
+    <tr><td>Field Operative</td><td>25 away missions</td><td>Field Operative</td></tr>
+    <tr><td>Contractor</td><td>50 contracts</td><td>Contractor</td></tr>
+    <tr><td>Merchant Prince</td><td>100,000 credits from sales</td><td>Merchant Prince</td></tr>
+    <tr><td>Fleet Admiral</td><td>Command 5 hull classes</td><td>Fleet Admiral</td></tr>
+    <tr><td>Veteran of Blackmoor</td><td>Fight for Blackmoor Haven</td><td>Veteran of Blackmoor</td></tr>
+    <tr><td>Siege Breaker</td><td>Fight in 5 world sieges</td><td>Conqueror</td></tr>
+  </table></div>
+  <h2>Titles</h2>
+  <p>Every achievement unlocks a title. Pick one with <code>/titles</code> and it shows on your nameplate after your name, for example <i>Name «Relic Hunter»</i>.</p>
 </article>
 
 <!-- ============================================================ COMMANDS -->
@@ -1038,6 +1206,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <tr><td><code>/ship map</code></td><td>A Galaxy Map to hold</td></tr>
     <tr><td><code>/ship pod</code></td><td>Beam your field cargo pod to you (hauler hulls)</td></tr>
     <tr><td><code>/ship npcs on|off</code></td><td>Show or hide your shipboard crew NPCs (captain or first officer)</td></tr>
+    <tr><td><code>/ship cosmetics</code></td><td>Hull paint, trim, interior decks and hull name plate</td></tr>
+    <tr><td><code>/ship sensors</code></td><td>Derelicts, distress calls, anomalies and the asteroid field</td></tr>
     <tr><td><code>/ship fund add &lt;amount|all&gt;</code></td><td>Pay into the ship fund</td></tr>
   </table></div>
   <h2>Everything else</h2>
@@ -1057,6 +1227,9 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <tr><td><code>/assist</code></td><td>rally</td><td>Beam into your alliance's battle</td></tr>
     <tr><td><code>/haven</code></td><td></td><td>Blackmoor Haven status; <code>/haven siege</code></td></tr>
     <tr><td><code>/bounty</code></td><td>bounties</td><td>Board; place, cancel</td></tr>
+    <tr><td><code>/journal</code></td><td>captainslog, cl, achievements</td><td>Your Captain's Log and achievements</td></tr>
+    <tr><td><code>/titles</code></td><td>title</td><td>Wear a title on your nameplate</td></tr>
+    <tr><td><code>/colony</code></td><td>colonies</td><td>Frontier settlements, leases and bids; <code>/colony beam</code></td></tr>
   </table></div>
   <h2>Controls</h2>
   <div class="tw"><table>
@@ -1080,7 +1253,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   <p class="lede-from">From Frontier Wiki · quick answers</p>
   <dl class="faq">
     <dt>How do I get more Energy Cells?</dt>
-    <dd>At any Replicator terminal, 2 coal + 2 raw copper makes 2 cells. 1 Warp Crystal + 2 redstone makes 4. 20 matter makes 2. The Quartermaster sells them for 10 credits each. See <a href="#energy-cells">Energy cells</a>.</dd>
+    <dd>At any Replicator terminal, 2 Carbon Chunks + 2 Raw Cuprite makes 2 cells. 1 Warp Crystal + 2 Energite Dust makes 4. 20 matter makes 2. The Quartermaster sells them for 10 credits each. See <a href="#energy-cells">Energy cells</a>.</dd>
     <dt>How do I smelt ore? There are no furnaces.</dt>
     <dd>Use the <b>Refinery</b> tab of any Replicator. Choose what to refine and it's done instantly. It's free: no fuel and no matter.</dd>
     <dt>Where do I mine before I have a ship?</dt>
@@ -1105,16 +1278,22 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
     <dd>Badge: 40 matter at the Replicator or 60 credits from the Quartermaster. Tricorder: 140 matter or 150 credits. Field manual: <code>/guide</code>.</dd>
     <dt>Why can't I break blocks on my ship?</dt>
     <dd>The original hull is protected. You can only break blocks you or your crew placed, and you need the <i>build</i> right (Captain, First and Second Officer, Chief Engineer).</dd>
-    <dt>Can I use ender pearls to get out of a ship?</dt>
+    <dt>Can I use Phase Pearls to get out of a ship?</dt>
     <dd>No. Pearls and chorus fruit are blocked aboard ships.</dd>
     <dt>Why do my items show “◆ RARE” and so on?</dt>
     <dd>That's the item's rarity. See <a href="#items">Items and rarity</a>.</dd>
     <dt>Where is PvP allowed?</dt>
     <dd>Only on danger-5 worlds and in the Outlands. See <a href="#pvp">PvP and bounties</a>.</dd>
     <dt>What happens if I die?</dt>
-    <dd>You respawn on your ship. In a PvP zone, if a player kills you, you drop everything you carry and lose 20% of your wallet to them.</dd>
+    <dd>You respawn on your ship. On PvE worlds and everywhere else that isn't a PvP zone, you <b>keep your armor, hotbar, off hand and suit pouches</b>; only your main inventory drops. In a PvP zone (danger-5 worlds and the Outlands) you drop <b>everything</b>, suit pouches included, and if a player killed you they take 5% of your wallet.</dd>
     <dt>How do I get a bigger suit pouch?</dt>
     <dd>Wear a better suit. EVA has 9 slots, Pathfinder 18, Assault 27, Vanguard 36 and Precursor 54.</dd>
+    <dt>How do I get into a derelict?</dt>
+    <dd>Open the Helm and click <b>Sensors</b>. If a derelict or distress call is on your sensors, click it to beam aboard. Bring an O₂ tank and some Energy Cells for the power junctions. See <a href="#derelicts">Derelicts</a>.</dd>
+    <dt>Where are the precursor vaults?</dt>
+    <dd>Under some alien sites. Walk up to a site: if it has a vault, your tricorder says so and a shaft marked with crying obsidian and light rods appears beside it. See <a href="#vaults">Precursor vaults</a>.</dd>
+    <dt>How do I show a title over my head?</dt>
+    <dd>Unlock achievements (<code>/journal</code>), then pick a title with <code>/titles</code>.</dd>
     <dt>What is the fastest money early on?</dt>
     <dd>Take contracts on nearby worlds, sell Alien Artifacts (140 each) and Relics (1,800), and mine deposits. Pledging to the Federation adds 20% to contract pay, and the Syndicate adds 15% to sales.</dd>
   </dl>
